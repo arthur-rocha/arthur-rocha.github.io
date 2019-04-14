@@ -1,78 +1,87 @@
-baseURL = "/"
+baseURL                   = "/"
 publishDir = "."
-languageCode = "en-us"
-defaultContentLanguage = "en"
-title = "Arthur Rocha"
-theme = "hermit"
-# enableGitInfo = true
-pygmentsCodefences  = true
-pygmentsUseClasses  = true
-# hasCJKLanguage = true  # If Chinese/Japanese/Korean is your main content language, enable this to make wordCount works right.
-rssLimit = 10  # Maximum number of items in the RSS feed.
-copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License." # This message is only used by the RSS template.
+builddrafts                = false
+languageCode               = "zn-Hans"
+canonifyurls               = true
+contentdir                 = "content"
+layoutdir                  = "layouts"
+publishdir                 = "public"
+enableEmoji                = true
+hasCJKLanguage             = true
+summaryLength              = 200
+Paginate                   = 3
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
-enableEmoji = true  # Shorthand emojis in content files - https://gohugo.io/functions/emojify/
-# googleAnalytics = "UA-123-45"
-# disqusShortname = "yourdiscussshortname"
 
-[author]
-  name = "Arthur Rocha"
 
-[blackfriday]
-  # hrefTargetBlank = true
-  # noreferrerLinks = true
-  # nofollowLinks = true
+theme = "AllinOne"
+title                      = "Arthur Rocha"
+
+pygmentsuseclasses         = true
+
+
+[permalinks]
+  blog                     = "blog/:year-:month/:slug/"
+
 
 [taxonomies]
-  tag = "tags"
-  # Categories are disabled by default.
+  tag                      = "tags"
+  series                   = "series"
+  category                 = "categories"
 
-[params]
-  dateform        = "Apr 14, 2019"
-  dateformShort   = "Apr 14"
-  dateformNum     = "2019-04-14"
-  dateformNumTime = "2019-04-14 03:52 -0700"
-
-  # Metadata mostly used in document's head
-  # description = ""
-  # images = [""]
-  themeColor = "#d1d1d1"
-
-  homeSubtitle = "Statistic, Data scientist & R lover."
-  footerCopyright = ' &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
-  # bgImg = ""  # Homepage background-image URL
-
-  # Prefix of link to the git commit detail page. GitInfo must be enabled.
-  # gitUrl = "https://github.com/username/repository/commit/"
-
-  # Toggling this option needs to rebuild SCSS, requires Hugo extended version
-  justifyContent = false  # Set "text-align: justify" to `.content`.
-
-  # Add custom css
-  # customCSS = ["css/foo.css", "css/bar.css"]
-
-  # Social Icons
-  # Check https://github.com/Track3/hermit#social-icons for more info.
-  [[params.social]]
-    name = "email"
-    url = "arthurcesariv@gmail.com"
-
-  [[params.social]]
-    name = "linkedin"
-    url = "https://linkedin.com/arthur-cesar-rocha"
-
-  [[params.social]]
-    name = "github"
-    url = "https://github.com/arthur-rocha"
 
 [menu]
+  [[menu.main]]
+    name                   = "Blog"
+    weight                 = -120
+    identifier             = "blog"
+    url                    = "blog/"  
 
   [[menu.main]]
-    name = "Posts"
-    url = "posts/"
-    weight = 10
+    name                   = "About"
+    weight                 = -110
+    identifier             = "about"
+    url                    = "about/" 
 
   [[menu.main]]
-    name = "About"
-    url = "about-me/"
-    weight = 20
+    name                   = "Contact"
+    weight                 = -100
+    identifier             = "moment"
+    url                    = "moment/"  
+
+ 
+
+[params]
+  #faviconfile              = "img/zheng.png"               # from static/
+  avatar                   = "img/Alpha.jpeg"             # path to image in static dir e.g img/avatar.png 
+  author                   = "Arthur Rocha"
+  description              = ["Statistic.", "Data scientist.", "In love with R & data visualization."]           # appears in the site header when set to a non-empty string
+  welcome_head             = "Hello!"
+  welcome_word             = "It is not a question of if but how"
+
+  latestpostscount         = 5                             # how many posts to display on the home page
+  bloggroupby              = 'month'
+  dateform                 = "Jan 2, 2006"
+  dateformfull             = "2006-01-02  Monday  15:04:05"
+  noshowreadtime           = false                         # if true, don't show "<x> minutes read" in posts
+
+  # slides
+  slidesDirPath            = "themes/AllinOne/static/img/header-slides"    # path to image in local dir (path for hugo)
+  slidesDirPathURL         = "img/header-slides"    # path to image in static dir (for static pages)
+
+  # highlighting 
+  highlightjs              = true
+
+  # latex
+  katex                    = true
+
+  # links
+  email                    = "arthurcesariv@gmail.com"
+  github                   = "//github.com/arthur-rocha"
+  linkedin                 = "//linkedin.com/in/arthur-cesar-rocha"
+
+  include_rss              = false                          # include RSS <link> tag in <head> and show RSS icon
+  
+  # analytics
+  #googleAnalytics          = "your-google-analytic-id"
+    
+    
