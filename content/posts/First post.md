@@ -1,6 +1,6 @@
 ---
 author: Arthur Rocha
-date: \today
+date: "2019-04-14"
 title: My first post!!
 ---
 

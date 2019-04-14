@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 23 Jul 2015 21:13:14 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 14 Apr 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>About me</title>
+      <link>/about-me/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/about-me/</guid>
+      <description>I&amp;rsquo;m a Statistic bachelor with love for R, data visualization, text mining and machine learning in general.</description>
+    </item>
+    
+    <item>
+      <title>My first post!!</title>
+      <link>/posts/first-post/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/first-post/</guid>
+      <description>Introduction This is my first post in this site!!</description>
+    </item>
     
     <item>
       <title>Hello R Markdown</title>
@@ -21,24 +39,6 @@
       <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
 You can embed an R code chunk like this:
 summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
-    </item>
-    
-    <item>
-      <title>About me</title>
-      <link>/about-me/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/about-me/</guid>
-      <description>I&amp;rsquo;m a Statistic bachelor with love for R, data visualization, text mining and machine learning in general.</description>
-    </item>
-    
-    <item>
-      <title>My first post!!</title>
-      <link>/posts/first-post/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/first-post/</guid>
-      <description>Introduction This is my first post in this site!!</description>
     </item>
     
   </channel>
