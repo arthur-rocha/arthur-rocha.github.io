@@ -11,7 +11,7 @@ tags:
   - hugo
 ---
 
-It's been a long (kind of) time since I start to formulate the idea for a blog to share my statistical/analytical stuff, more precisely in the second year of my bachelor degree (2016). Since then I've learned a lot (in multiple fields), so, finally I'm able to make this thing happen!
+It's been a long (kind of) time since I start to formulate the idea for a blog to share my statistical/analytical stuff, more precisely since I was in the second year of my bachelor degree (2016). Since then I've learned a lot (in multiple fields), so, finally I'm able to make this thing happen!
 
 As a statistician, I was molded in the R/S-plus world, so the most convenient way to make this site (that I've found) was using the [bookdown package](https://bookdown.org/yihui/blogdown) for R, wich is a really great tool to build blogs like this, based in the [Hugo framework](https://gohugo.io/), and have a nice integration with the R-studio IDE. 
 
