@@ -6,19 +6,10 @@
     <description>Recent content in Blog on Arthur Rocha</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Sun, 14 Apr 2019 21:13:14 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 14 Apr 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>My first post</title>
-      <link>/post/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Sun, 14 Apr 2019 21:13:14 -0500</pubDate>
-      
-      <guid>/post/2015-07-23-r-rmarkdown/</guid>
-      <description>Nice Plotspar(mar = c(0, 1, 0, 1))pie(c(280, 60, 20),c(&amp;#39;Sky&amp;#39;, &amp;#39;Sunny side of pyramid&amp;#39;, &amp;#39;Shady side of pyramid&amp;#39;),col = c(&amp;#39;#0292D8&amp;#39;, &amp;#39;#F7EA39&amp;#39;, &amp;#39;#C4B632&amp;#39;),init.angle = -50, border = NA)Figure 1: A fancy pie chart.</description>
-    </item>
     
     <item>
       <title>How (and why) I made this blog</title>
@@ -26,9 +17,7 @@
       <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/how-and-why-i-made-this-blog/</guid>
-      <description>It&amp;rsquo;s been a long (kind of) time since I start to formulate the idea for a blog to share my statistical/analytical stuff, more precisely in the second year of my bachelor degree (2016). Since then I&amp;rsquo;ve learned a lot (in multiple fields), so, finally I&amp;rsquo;m able to make this thing happen!
-As a statistician, I was molded in the R/S-plus world, so the most convenient way to make this site (that I&amp;rsquo;ve found) was using the bookdown package for R, wich is a really great tool to build blogs like this, based in the Hugo framework, and have a nice integration with the R-studio IDE.
-For this blog I&amp;rsquo;m using the AllinOne theme by Orianna with some modifications.</description>
+      <description></description>
     </item>
     
   </channel>

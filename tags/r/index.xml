@@ -17,9 +17,7 @@
       <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/how-and-why-i-made-this-blog/</guid>
-      <description>It&amp;rsquo;s been a long (kind of) time since I start to formulate the idea for a blog to share my statistical/analytical stuff, more precisely in the second year of my bachelor degree (2016). Since then I&amp;rsquo;ve learned a lot (in multiple fields), so, finally I&amp;rsquo;m able to make this thing happen!
-As a statistician, I was molded in the R/S-plus world, so the most convenient way to make this site (that I&amp;rsquo;ve found) was using the bookdown package for R, wich is a really great tool to build blogs like this, based in the Hugo framework, and have a nice integration with the R-studio IDE.
-For this blog I&amp;rsquo;m using the AllinOne theme by Orianna with some modifications.</description>
+      <description></description>
     </item>
     
   </channel>
