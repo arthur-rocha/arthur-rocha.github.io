@@ -6,10 +6,21 @@
     <description>Recent content on Arthur Rocha</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Sun, 14 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Apr 2019 12:03:06 -0300</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using Xkcd to Make Density Plots</title>
+      <link>/post/2019-04-24-using-xkcd-to-make-density-plots/</link>
+      <pubDate>Wed, 24 Apr 2019 12:03:06 -0300</pubDate>
+      
+      <guid>/post/2019-04-24-using-xkcd-to-make-density-plots/</guid>
+      <description>So, I’ve always been interesting in the “xkcd type” of figures because IT’S FUN.
+My goal here is to make density plots of the most common probability functions.
+First of all, we will need to load these packages:library(xkcd)library(dplyr)library(ggplot2)Now, we do a function using the ggplot2 sintax to make the plot. Note that we need calculate the axes ranges and apply “jitter” to x and y to create a hand-drawn effect in the line.xkcd_density = function(x,y){# Calcule the axis rangexrange = range(x)yrange = range(y)# Plot line type + jitterqplot(jitter(x),jitter(y),geom = &amp;quot;blank&amp;quot;)+geom_line(linetype = 1,size=1.5)+theme_xkcd()+xkcdaxis(xrange,yrange)+xlab(&amp;quot;&amp;quot;)+ylab(&amp;quot;&amp;quot;)}Ploting the standart normal (0,1) density.x = seq(-3,3,by=.1)y = dnorm(x,mean=0,sd=1)xkcd_density(x,y)Ploting the Chi square (df = 3) desity.x = c(0,seq(0.1,10,by=.1))y = c(0,dchisq(x[-1],df=3))xkcd_density(x,y)There you have! A nice looking (sort of) density plot!</description>
+    </item>
     
     <item>
       <title>How (and why) I made this blog</title>
@@ -17,7 +28,9 @@
       <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/how-and-why-i-made-this-blog/</guid>
-      <description></description>
+      <description>It&amp;rsquo;s been a long (kind of) time since I start to formulate the idea for a blog to share my statistical/analytical stuff, more precisely since I was in the second year of my bachelor degree (2016). Since then I&amp;rsquo;ve learned a lot (in multiple fields), so, finally I&amp;rsquo;m able to make this thing happen!
+As a statistician, I was molded in the R/S-plus world, so the most convenient way to make this site (that I&amp;rsquo;ve found) was using the bookdown package for R, wich is a really great tool to build blogs like this, based in the Hugo framework, and have a nice integration with the R-studio IDE.
+For this blog I&amp;rsquo;m using the AllinOne theme by Orianna with some modifications.</description>
     </item>
     
   </channel>

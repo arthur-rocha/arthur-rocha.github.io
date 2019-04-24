@@ -15,7 +15,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/" />
 
-<meta property="og:updated_time" content="2019-04-14T00:00:00&#43;00:00"/>
+<meta property="og:updated_time" content="2019-04-24T12:03:06-03:00"/>
 
 
   <title>
@@ -46,7 +46,7 @@
   
   <link rel="shortcut icon"
   
-      href="/img/Alpha.jpeg"
+      href="/img/Alpha.jpg"
   
   >
 
@@ -196,7 +196,7 @@
       <div class="col-12 col-sm-5 align-middle">
         <a href="/">
           
-            <img class="pull-right avatar avatar-lg " src="/img/Alpha.jpeg" alt="" >
+            <img class="pull-right avatar avatar-lg " src="/img/Alpha.jpg" alt="" >
           
         </a>
       </div>
@@ -399,6 +399,47 @@
               
                   <div class="post-wrapper white-bg post-card">
   
+  <a href="/post/2019-04-24-using-xkcd-to-make-density-plots/">
+    <div class="post-header text-center">
+      <div class="px-4 post-heading">Using Xkcd to Make Density Plots</div>
+      <ul class="post-meta li-x mt-1">
+        
+          <li>Apr 24, 2019</li>
+        
+    
+        
+          <li class="middot"></li>
+          <li>One minute read</li>
+        
+      </ul>
+    </div>
+    
+
+    
+      So, I’ve always been interesting in the “xkcd type” of figures because IT’S FUN.
+My goal here is to make density plots of the most common probability functions.
+First of all, we will need to load these packages:library(xkcd)library(dplyr)library(ggplot2)Now, we do a function using the ggplot2 sintax to make the plot. Note that we need calculate the axes ranges and apply “jitter” to x and y to create a hand-drawn effect in the line.xkcd_density = function(x,y){# Calcule the axis rangexrange = range(x)yrange = range(y)# Plot line type &#43; jitterqplot(jitter(x),jitter(y),geom = &#34;blank&#34;)&#43;geom_line(linetype = 1,size=1.5)&#43;theme_xkcd()&#43;xkcdaxis(xrange,yrange)&#43;xlab(&#34;&#34;)&#43;ylab(&#34;&#34;)}Ploting the standart normal (0,1) density.x = seq(-3,3,by=.1)y = dnorm(x,mean=0,sd=1)xkcd_density(x,y)Ploting the Chi square (df = 3) desity.x = c(0,seq(0.1,10,by=.1))y = c(0,dchisq(x[-1],df=3))xkcd_density(x,y)There you have! A nice looking (sort of) density plot!......
+    
+  </a>
+
+  
+  
+  <div class="post-meta li-x mt-2 div-x">
+    <div>
+      
+      
+    </div>
+   
+    <div>
+      
+    </div>
+  </div>
+
+</div>
+
+              
+                  <div class="post-wrapper white-bg post-card">
+  
   <a href="/post/how-and-why-i-made-this-blog/">
     <div class="post-header text-center">
       <div class="px-4 post-heading">How (and why) I made this blog</div>
@@ -409,14 +450,16 @@
     
         
           <li class="middot"></li>
-          <li>0 minutes read</li>
+          <li>One minute read</li>
         
       </ul>
     </div>
     
 
     
-      ......
+      It’s been a long (kind of) time since I start to formulate the idea for a blog to share my statistical/analytical stuff, more precisely since I was in the second year of my bachelor degree (2016). Since then I’ve learned a lot (in multiple fields), so, finally I’m able to make this thing happen!
+As a statistician, I was molded in the R/S-plus world, so the most convenient way to make this site (that I’ve found) was using the bookdown package for R, wich is a really great tool to build blogs like this, based in the Hugo framework, and have a nice integration with the R-studio IDE.
+For this blog I’m using the AllinOne theme by Orianna with some modifications.......
     
   </a>
 
