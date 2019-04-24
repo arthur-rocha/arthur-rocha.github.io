@@ -14,37 +14,55 @@
   </url>
   
   <url>
+    <loc>/categories/</loc>
+    <lastmod>2019-04-24T12:03:06-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/how-to/</loc>
+    <lastmod>2019-04-24T12:03:06-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/r/</loc>
+    <lastmod>2019-04-24T12:03:06-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-04-24T12:03:06-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/post/2019-04-24-using-xkcd-to-make-density-plots/</loc>
     <lastmod>2019-04-24T12:03:06-03:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/</loc>
-    <lastmod>2019-04-14T00:00:00+00:00</lastmod>
+    <loc>/tags/density/</loc>
+    <lastmod>2019-04-24T12:03:06-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/statistics/</loc>
+    <lastmod>2019-04-24T12:03:06-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/xkcd/</loc>
+    <lastmod>2019-04-24T12:03:06-03:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/post/how-and-why-i-made-this-blog/</loc>
     <lastmod>2019-04-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/how-to/</loc>
-    <lastmod>2019-04-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/r/</loc>
-    <lastmod>2019-04-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-04-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

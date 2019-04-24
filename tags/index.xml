@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Arthur Rocha</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Sun, 14 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Apr 2019 12:03:06 -0300</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,36 @@
     <item>
       <title>R</title>
       <link>/tags/r/</link>
-      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 24 Apr 2019 12:03:06 -0300</pubDate>
       
       <guid>/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>density</title>
+      <link>/tags/density/</link>
+      <pubDate>Wed, 24 Apr 2019 12:03:06 -0300</pubDate>
+      
+      <guid>/tags/density/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>statistics</title>
+      <link>/tags/statistics/</link>
+      <pubDate>Wed, 24 Apr 2019 12:03:06 -0300</pubDate>
+      
+      <guid>/tags/statistics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>xkcd</title>
+      <link>/tags/xkcd/</link>
+      <pubDate>Wed, 24 Apr 2019 12:03:06 -0300</pubDate>
+      
+      <guid>/tags/xkcd/</guid>
       <description></description>
     </item>
     

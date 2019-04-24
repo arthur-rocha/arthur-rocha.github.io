@@ -255,6 +255,8 @@
 
   
 
+  
+
 
 
 
@@ -287,6 +289,8 @@
 
   
 
+  
+
 
 
 
@@ -307,13 +311,22 @@
         
         
         
+            <li><a href="/tags/r" role="button"><span>r (2)</span></a></li>
+          
+        
             <li><a href="/tags/blogdown" role="button"><span>blogdown (1)</span></a></li>
+          
+        
+            <li><a href="/tags/density" role="button"><span>density (1)</span></a></li>
           
         
             <li><a href="/tags/hugo" role="button"><span>hugo (1)</span></a></li>
           
         
-            <li><a href="/tags/r" role="button"><span>r (1)</span></a></li>
+            <li><a href="/tags/statistics" role="button"><span>statistics (1)</span></a></li>
+          
+        
+            <li><a href="/tags/xkcd" role="button"><span>xkcd (1)</span></a></li>
           
         
       </div>
@@ -388,9 +401,9 @@
     
 
     
-      So, I’ve always been interesting in the “xkcd type” of figures because IT’S FUN.
-My goal here is to make density plots of the most common probability functions.
-First of all, we will need to load these packages:library(xkcd)library(dplyr)library(ggplot2)Now, we do a function using the ggplot2 sintax to make the plot. Note that we need calculate the axes ranges and apply “jitter” to x and y to create a hand-drawn effect in the line.xkcd_density = function(x,y){# Calcule the axis rangexrange = range(x)yrange = range(y)# Plot line type &#43; jitterqplot(jitter(x),jitter(y),geom = &#34;blank&#34;)&#43;geom_line(linetype = 1,size=1.5)&#43;theme_xkcd()&#43;xkcdaxis(xrange,yrange)&#43;xlab(&#34;&#34;)&#43;ylab(&#34;&#34;)}Ploting the standart normal (0,1) density.x = seq(-3,3,by=.1)y = dnorm(x,mean=0,sd=1)xkcd_density(x,y)Ploting the Chi square (df = 3) desity.x = c(0,seq(0.1,10,by=.1))y = c(0,dchisq(x[-1],df=3))xkcd_density(x,y)There you have! A nice looking (sort of) density plot!......
+      So, I’ve always been interesting in the “xkcd type” of figures only because IT’S FUN.
+My goal here is to make density plots of the most common probability functions using the xkcd style.
+First of all, we will need to load these packages:library(xkcd)library(dplyr)library(ggplot2)Now, we do a function using the ggplot2 sintax to make the plot. Note that we need calculate the axes ranges and apply “jitter” to x and y to create a hand-drawn effect in the line.xkcd_density = function(x,y){# Calcule the axis rangexrange = range(x)yrange = range(y)# Plot line type &#43; jitterqplot(jitter(x),jitter(y),geom = &#34;blank&#34;)&#43;geom_line(linetype = 1,size=1.5)&#43;theme_xkcd()&#43;xkcdaxis(xrange,yrange)&#43;xlab(&#34;&#34;)&#43;ylab(&#34;&#34;)}Ploting the standart normal (0,1) density.x = seq(-3,3,by=.1)y = dnorm(x,mean=0,sd=1)xkcd_density(x,y)Ploting the Chi square (df = 3) desity.x = c(0,seq(0.1,10,by=.1))y = c(0,dchisq(x[-1],df=3))xkcd_density(x,y)There you have! A nice looking (sort of) xkcd density plot!......
     
   </a>
 
@@ -399,10 +412,34 @@ My goal here is to make density plots of the most common probability functions.
   <div class="post-meta li-x mt-2 div-x">
     <div>
       
+        
+          <li><a href="/categories/how-to"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> How to </a></li>
+        
+      
       
     </div>
    
     <div>
+      
+        
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="/tags/r" role="button">R </a></li>
+      
+    
+      <li><a href="/tags/xkcd" role="button">xkcd </a></li>
+      
+    
+      <li><a href="/tags/density" role="button">density </a></li>
+      
+    
+      <li><a href="/tags/statistics" role="button">statistics </a></li>
+      
+    
+  </div>
+</div>
       
     </div>
   </div>

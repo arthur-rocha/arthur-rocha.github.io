@@ -2,6 +2,13 @@
 title: "Using Xkcd to Make Density Plots"
 author: "Arthur Rocha"
 date: "2019-04-24T12:03:06-03:00"
+categories:
+  - How to
+tags:
+  - R
+  - xkcd
+  - density
+  - statistics
 output: html_document
 ---
 
@@ -9,10 +16,10 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE,message = F,warning = F)
 ```
 
-So, I've always been interesting in the ["xkcd type"]("https://xkcd.com/") of figures because **IT'S FUN**. 
+So, I've always been interesting in the ["xkcd type"](https://xkcd.com/) of figures only because **IT'S FUN**.
 
 
-My goal here is to make density plots of the most common probability functions.
+My goal here is to make density plots of the most common probability functions using the xkcd style.
 
 
 - First of all, we will need to load these packages:
@@ -58,4 +65,4 @@ y = c(0,dchisq(x[-1],df=3))
 xkcd_density(x,y)
 ```
 
-There you have! A nice looking (sort of) density plot!
+There you have! A nice looking (sort of) xkcd density plot!
