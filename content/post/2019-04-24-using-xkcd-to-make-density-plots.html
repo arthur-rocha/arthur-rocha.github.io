@@ -1,0 +1,48 @@
+---
+title = "2019-04-24-Using-Xkcd-to-Make-Density-Plots"
+date = "2019-04-24T12:03:06-03:00"
+draft = true
+---
+
+
+
+<p>So, I’ve always been interesting in the <a href="%22https://xkcd.com/%22">“xkcd type”</a> of figures because <strong>IT’S FUN</strong>.</p>
+<p>My goal here is to make density plots of the most common probability functions.</p>
+<ul>
+<li>First of all, we will need to load these packages:</li>
+</ul>
+<pre class="r"><code>library(xkcd)
+library(dplyr)
+library(ggplot2)</code></pre>
+<ul>
+<li>Now, we do a function using the ggplot2 sintax to make the plot. Note that we need calculate the axes ranges and apply “jitter” to x and y to create a hand-drawn effect in the line.</li>
+</ul>
+<pre class="r"><code>xkcd_density = function(x,y){
+  
+  # Calcule the axis range
+  xrange = range(x)
+  yrange = range(y)
+  
+  # Plot line type + jitter
+  qplot(jitter(x),jitter(y),geom = &quot;blank&quot;)+
+    geom_line(linetype = 1,size=1.5)+
+    theme_xkcd()+
+    xkcdaxis(xrange,yrange)+
+    xlab(&quot;&quot;)+
+    ylab(&quot;&quot;)
+}</code></pre>
+<ul>
+<li>Ploting the standart normal (0,1) density.</li>
+</ul>
+<pre class="r"><code>x = seq(-3,3,by=.1)
+y = dnorm(x,mean=0,sd=1)
+xkcd_density(x,y)</code></pre>
+<p><img src="/post/2019-04-24-using-xkcd-to-make-density-plots_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<ul>
+<li>Ploting the Chi square (df = 3) desity.</li>
+</ul>
+<pre class="r"><code>x = c(0,seq(0.1,10,by=.1))
+y = c(0,dchisq(x[-1],df=3))
+xkcd_density(x,y)</code></pre>
+<p><img src="/post/2019-04-24-using-xkcd-to-make-density-plots_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>There you have! A nice looking (sort of) density plot!</p>
