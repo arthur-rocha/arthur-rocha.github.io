@@ -20,6 +20,17 @@
   </url>
   
   <url>
+    <loc>/categories/cool-stuff/</loc>
+    <lastmod>2019-04-24T12:03:06-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/2019-04-24-how-many-rounds-on-top-to-glory/</loc>
+    <lastmod>2019-04-24T12:03:06-03:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/categories/how-to/</loc>
     <lastmod>2019-04-24T12:03:06-03:00</lastmod>
     <priority>0</priority>
@@ -27,6 +38,12 @@
   
   <url>
     <loc>/tags/r/</loc>
+    <lastmod>2019-04-24T12:03:06-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/roc/</loc>
     <lastmod>2019-04-24T12:03:06-03:00</lastmod>
     <priority>0</priority>
   </url>
@@ -43,7 +60,25 @@
   </url>
   
   <url>
+    <loc>/tags/brazil/</loc>
+    <lastmod>2019-04-24T12:03:06-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/density/</loc>
+    <lastmod>2019-04-24T12:03:06-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/logistic-regression/</loc>
+    <lastmod>2019-04-24T12:03:06-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/soccer/</loc>
     <lastmod>2019-04-24T12:03:06-03:00</lastmod>
     <priority>0</priority>
   </url>

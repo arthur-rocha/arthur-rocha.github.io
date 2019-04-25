@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="zn-Hans">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
+  <meta name="author" content="Arthur Rocha">
+  <meta name="description" content="IntroductionLike almost everyone here in Brazil, I have a passion for football (or soccer) and because of that my father and I are always alert to the national championship.
+So, a few days ago my father gave me a challenge, he challenged me to understand what is needed to be a champion in the brazilian national soccer league (knowed here as “Brasileirão”) since the competition change its format to a point based championship in 2003.Thus I’ve accepted the challenge and here are the results:
+DataFirstly we need to get the data!!I haven’t found a well structured data base to work with, so I had to work with the information provided by this site http://futpedia.globo.com/campeonato/campeonato-brasileiro/ andI had to do a function to scrap the data.
+Packages usedlibrary(XML) #Package to do web scrapinglibrary(dplyr) #Manipulationlibrary(magrittr) #Manipulationlibrary(tidyr) #Manipulationlibrary(ggplot2) #PlotsThat is the function to do the web scraping. Note that the site has information only until 2015.# URL base to all yearsurl1=&quot;http://futpedia.globo.com/campeonato/campeonato-brasileiro/&quot;#Empty data frame to store the informationgames= data_frame()for (i in 2003:2015) { ## yearsurl2 = paste0(url1,i)readHTMLTable(url2,as.data.frame = T)%&gt;%data.">
+  
+  <meta property="og:title" content="How many rounds on top are necessary to be a soccer champion?" />
+<meta property="og:description" content="IntroductionLike almost everyone here in Brazil, I have a passion for football (or soccer) and because of that my father and I are always alert to the national championship.
+So, a few days ago my father gave me a challenge, he challenged me to understand what is needed to be a champion in the brazilian national soccer league (knowed here as “Brasileirão”) since the competition change its format to a point based championship in 2003.Thus I’ve accepted the challenge and here are the results:
+DataFirstly we need to get the data!!I haven’t found a well structured data base to work with, so I had to work with the information provided by this site http://futpedia.globo.com/campeonato/campeonato-brasileiro/ andI had to do a function to scrap the data.
+Packages usedlibrary(XML) #Package to do web scrapinglibrary(dplyr) #Manipulationlibrary(magrittr) #Manipulationlibrary(tidyr) #Manipulationlibrary(ggplot2) #PlotsThat is the function to do the web scraping. Note that the site has information only until 2015.# URL base to all yearsurl1=&quot;http://futpedia.globo.com/campeonato/campeonato-brasileiro/&quot;#Empty data frame to store the informationgames= data_frame()for (i in 2003:2015) { ## yearsurl2 = paste0(url1,i)readHTMLTable(url2,as.data.frame = T)%&gt;%data." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/2019-04-24-how-many-rounds-on-top-to-glory/" />
+<meta property="article:published_time" content="2019-04-24T12:03:06-03:00"/>
+<meta property="article:modified_time" content="2019-04-24T12:03:06-03:00"/>
+
+
+  <title>
+  
+       How many rounds on top are necessary to be a soccer champion? | Arthur Rocha 
+  
+  </title>
+
+  <link rel="canonical" href="/post/2019-04-24-how-many-rounds-on-top-to-glory/">
+
+  
+  
+
+  
+  <link href="/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="/css/font.css" rel="stylesheet"> 
+    
+  
+  <link href="/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
+  <link href="/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="/css/main.css" rel="stylesheet">
+
+
+  
+  <link rel="shortcut icon"
+  
+      href="/img/Alpha.jpg"
+  
+  >
+
+
+  
+  
+
+  <style type="text/css">
+      @media (min-width: 800px) and (max-width: 850px) {
+              .navbar:not(.top-nav-collapse) {
+                  background: #1C2331!important;
+              }
+          }
+  </style>
+
+
+  
+    
+    <link rel="stylesheet" href="/js/vendors/katex/katex.min.css">
+  
+  
+
+  
+    
+    <link rel="stylesheet" href="/css/vendors/highlight/github-gist.css">
+  
+
+</head>
+
+  <body class="bg-light" data-spy="scroll" data-target="#page-scrollspy" data-offset="90">
+  
+    
+    
+
+    
+      
+
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
+
+      
+      <a class="navbar-brand" href="/">
+          
+        <img class="avatar" src="/" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
+        
+        <strong> Arthur Rocha</strong>
+      </a>
+
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        
+        <ul class="navbar-nav mr-auto ">
+          <li class="nav-item ">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="/post" >Blog  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="/about" >About  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="/projects" >Projects  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="/contact" >Contact  </a>
+            </li>
+          
+          
+        </ul>
+
+      </div>
+
+    </div>
+  </nav>
+  
+ 
+      
+ 
+
+
+
+
+
+
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;" >  
+
+  
+  
+  
+
+  
+  <div class="carousel-inner" role="listbox">
+    
+      
+
+        
+        <div class="carousel-item active">
+          <div class="view" style="background-image: url('/img/header-slides/nasa-53884-unsplash.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+            
+            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+              
+              
+              
+
+            </div>
+            
+
+          </div>
+        </div>
+        
+      
+    
+
+  
+  </div>
+  
+
+  
+  <div class="carousel-content text-center white-text wow fadeIn">
+    <div class="row mx-0 headfont mt-3 pt-4">
+      
+      <div class="col-12 col-sm-5 align-middle">
+        <a href="/">
+          
+            <img class="pull-right avatar avatar-md" src="/img/Alpha.jpg" alt="" >
+          
+        </a>
+      </div>
+      
+      <div class="col-12 col-sm-7 text-left pl-2">
+        <a href="/">
+          <h1 class="mb-2 h1" style="font-weight: 300;" >
+            <strong>Arthur Rocha</strong>
+          </h1>
+        </a>
+        
+
+             
+        <div class="mt-2" style="font-size: 1rem; color: white;">
+            
+              <a href="//github.com/arthur-rocha" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
+            
+            
+              <a href="//linkedin.com/in/arthur-cesar-rocha" target="_blank" rel="noopener"><i class="fab fa-linkedin pr-1" aria-hidden="true"></i></a>
+            
+
+            
+
+            
+
+            
+
+            
+    
+            
+    
+        
+            
+                <a href="mailto:arthurcesariv@gmail.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+            
+    
+            
+
+            
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  
+  
+  
+
+</div>
+  
+    
+
+    
+  
+  <main class="post-main-wrapper">
+    
+    
+    <div class="row">
+
+      
+
+      
+      <div class="container pr-5">
+      
+
+        
+        <div class="z-depth-1  post-wrapper white-bg single-post">
+
+          <div class="post-header text-center" >
+  <ul class="post-meta li-x">
+    
+      
+        <li><a href="/categories/cool-stuff"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> Cool stuff </a></li>
+      
+    
+    
+  </ul>
+
+  <div class="px-4 post-heading">How many rounds on top are necessary to be a soccer champion?</div>
+
+  <ul class="post-meta li-x mt-1">
+    
+      <li>Apr 24, 2019</li>
+    
+
+    
+      <li class="middot"></li>
+      <li>6 minutes read</li>
+    
+  </ul>
+  
+
+</div>
+
+
+          <div class="post-content markdown">
+            
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<ul>
+<li>Like almost everyone here in Brazil, I have a passion for football (or soccer) and because of that my father and I are always alert to the national championship.<br />
+So, a few days ago my father gave me a challenge, he challenged me to understand what is needed to be a champion in the brazilian national soccer league (knowed here as “Brasileirão”) since the competition change its format to a point based championship in 2003.</li>
+</ul>
+<p>Thus I’ve accepted the challenge and here are the results:</p>
+</div>
+<div id="data" class="section level2">
+<h2>Data</h2>
+<ul>
+<li>Firstly we need to get the data!!</li>
+</ul>
+<p>I haven’t found a well structured data base to work with, so I had to work with the information provided by this site <a href="http://futpedia.globo.com/campeonato/campeonato-brasileiro/">http://futpedia.globo.com/campeonato/campeonato-brasileiro/</a> and
+I had to do a function to scrap the data.</p>
+<ul>
+<li>Packages used</li>
+</ul>
+<pre class="r"><code>library(XML)      #Package to do web scraping
+library(dplyr)    #Manipulation
+library(magrittr) #Manipulation
+library(tidyr)    #Manipulation
+library(ggplot2)  #Plots</code></pre>
+<ul>
+<li>That is the function to do the web scraping. Note that the site has information only until 2015.</li>
+</ul>
+<pre class="r"><code># URL base to all years
+url1=&quot;http://futpedia.globo.com/campeonato/campeonato-brasileiro/&quot;
+
+#Empty data frame to store the information
+games= data_frame()
+
+for (i in 2003:2015) { ## years
+  url2 = paste0(url1,i)
+  
+  readHTMLTable(url2,as.data.frame = T)%&gt;%
+    data.table::rbindlist()%&gt;%
+    setNames(c(&quot;Position&quot;,&quot;Team&quot;,&quot;Points&quot;,&quot;Games&quot;,&quot;Victories&quot;,&quot;Ties&quot;,
+               &quot;Losses&quot;,&quot;Goals scored&quot;,&quot;Goals conceded&quot;,&quot;Goal difference&quot;,
+               &quot;Performance&quot;))%&gt;%
+    mutate(Year = i)%&gt;%
+    bind_rows(games) -&gt; games
+}</code></pre>
+<p>If you don’t want to scrap the data (because take some time and sometimes don’t work so fine) you can get it from here <a href="https://github.com/arthur-rocha/Brasileirao/raw/master/Brasileirao%202003%20-%202015.csv">Data!</a>.</p>
+<p><strong>Tip:</strong> Be aware with the encoding!</p>
+<ul>
+<li>Moving on, we need some extra information, like which team was the champion in the season and how many games (rounds) are in each season, because the number of teams has changed in 2005 and changed again in 2006.</li>
+</ul>
+<pre class="r"><code># Champions data
+champ_dt = data_frame(Year = 2003:2018,
+                      Champion = c(&quot;Cruzeiro&quot;,&quot;Santos&quot;,&quot;Corinthians&quot;,&quot;São Paulo&quot;,
+                                   &quot;São Paulo&quot;,&quot;São Paulo&quot;,&quot;Flamengo&quot;,&quot;Fluminense&quot;,
+                                   &quot;Corinthians&quot;,&quot;Fluminense&quot;,&quot;Cruzeiro&quot;,&quot;Cruzeiro&quot;,
+                                   &quot;Corinthians&quot;,&quot;Palmeiras&quot;,&quot;Corinthias&quot;,&quot;Palmeiras&quot;))</code></pre>
+<pre class="r"><code>games %&lt;&gt;%  # Tracking the round (game) number
+  mutate(Round = c(rep(rep(1:38,each =20),10),
+                   rep(1:42,each =22),
+                   rep(1:46,each =24),rep(1:46,each =24)))%&gt;%
+  
+  # Finding the champion in each season
+  inner_join(champ_dt) %&gt;%
+  # Is this team the champion of this year?
+  mutate(Champ = if_else(Team == Champion, 1,0),
+         # Total number of games in the season
+         N_round = case_when(Year &lt; 2005 ~ 46,
+                             Year == 2005 ~ 42,
+                             Year &gt; 2005 ~38),
+         # In this round, this team is in the first place?
+         First_place = if_else(Position ==1,1,0 ),
+         # In this round, this team is in the first place
+         # and is the champion?
+         TP = if_else(First_place == 1 &amp; Champ == 1,
+                      1,0),
+         # In this round, this team is in the first place
+         # and isn&#39;t the champion?
+         TN = if_else(First_place == 1 &amp; Champ == 1,
+                      1,0))</code></pre>
+<ul>
+<li>Let’s take a look in the data</li>
+</ul>
+<pre class="r"><code>head(games)</code></pre>
+<pre><code>## # A tibble: 6 x 19
+##   Position Team  Points Games Victories  Ties Losses `Goals scored`
+##      &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;          &lt;dbl&gt;
+## 1        1 Sport      3     1         1     0      0              4
+## 2        2 Athl~      3     1         1     0      0              3
+## 3        3 Chap~      3     1         1     0      0              2
+## 4        3 &quot;S\x~      3     1         1     0      0              2
+## 5        5 Cori~      3     1         1     0      0              1
+## 6        6 Flum~      3     1         1     0      0              1
+## # ... with 11 more variables: `Goals conceded` &lt;dbl&gt;, `Goal
+## #   difference` &lt;dbl&gt;, Performance &lt;dbl&gt;, Year &lt;dbl&gt;, Round &lt;dbl&gt;,
+## #   Champion &lt;chr&gt;, Champ &lt;dbl&gt;, N_round &lt;dbl&gt;, First_place &lt;dbl&gt;,
+## #   TP &lt;dbl&gt;, TN &lt;dbl&gt;</code></pre>
+<p>All seems ok, let’s continue…</p>
+</div>
+<div id="analysing-the-initial-rounds." class="section level2">
+<h2>Analysing the initial rounds.</h2>
+<ul>
+<li>So, now we can analyse the data. Initially, we can try to find the “champion profile” at the 5th and 10th round.</li>
+</ul>
+<div id="th-round" class="section level3">
+<h3>5th round:</h3>
+<pre class="r"><code># Making a plot
+games %&gt;%
+  filter(Round == 5)%&gt;%
+  select(Points, Victories, Ties, Losses,
+         `Goals scored`, `Goals conceded`,
+         Position,Champ)%&gt;%
+  mutate_all(.funs = as.numeric)%&gt;%
+  mutate(Champ = factor(Champ, labels= c(&quot;Not champion&quot;,&quot;Champion&quot;)))%&gt;%
+  gather(key=&quot;Variable&quot;,value=&quot;value&quot;,-c(Champ))%&gt;%
+  ggplot(aes(value,fill=Champ))+
+  geom_histogram(aes(y=..density..),binwidth = 1,col=1,alpha=.3)+
+  facet_wrap( ~Variable,scales = &quot;free&quot;)+
+  theme_light()+
+  scale_fill_discrete(&quot;&quot;)+
+  ylab(&quot;Frequency (%)&quot;)+
+  scale_y_continuous(labels = scales::percent)</code></pre>
+<p><img src="/post/2019-04-24-how-many-rounds-on-top-to-glory_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code># Making a table
+games %&gt;%
+  filter(Round == 5)%&gt;%
+  select(Points, Victories, Ties, Losses,
+         `Goals scored`, `Goals conceded`,
+         Position,Champ,Performance)%&gt;%
+  mutate_all(.funs = as.numeric)%&gt;%
+  mutate(Champ = factor(Champ, labels= c(&quot;Not champion&quot;,&quot;Champion&quot;)))%&gt;%
+  gather(key=&quot;Variable&quot;,value=&quot;value&quot;,-c(Champ))%&gt;%
+  filter(value&gt;=0)%&gt;%
+  group_by(Variable,Champ)%&gt;%
+  summarise(Min= min(value),Mean = mean(value),Max = max(value),
+            SD = sd(value))</code></pre>
+<pre><code>## # A tibble: 16 x 6
+## # Groups:   Variable [8]
+##    Variable       Champ          Min  Mean   Max     SD
+##    &lt;chr&gt;          &lt;fct&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Goals conceded Not champion     1  6.59  17    2.95 
+##  2 Goals conceded Champion         2  6     12    2.83 
+##  3 Goals scored   Not champion     1  6.49  16    2.71 
+##  4 Goals scored   Champion         3  7.92  17    3.59 
+##  5 Losses         Not champion     0  1.77   5    1.10 
+##  6 Losses         Champion         0  1.38   3    0.961
+##  7 Performance    Not champion     0 44.4  100   19.7  
+##  8 Performance    Champion        40 55.9   86.7 13.8  
+##  9 Points         Not champion     0  6.69  15    2.98 
+## 10 Points         Champion         6  8.38  13    2.06 
+## 11 Position       Not champion     1 11.1   24    6.11 
+## 12 Position       Champion         1  7.23  15    4.40 
+## 13 Ties           Not champion     0  1.52   4    0.960
+## 14 Ties           Champion         0  1.23   3    1.01 
+## 15 Victories      Not champion     0  1.72   5    1.07 
+## 16 Victories      Champion         1  2.38   4    0.768</code></pre>
+<p>Here we can see that, at the 5th round, all the champions have woned at least one game, and drawn at least one game too.</p>
+</div>
+<div id="th-round-1" class="section level3">
+<h3>10th round:</h3>
+<pre class="r"><code># Making a plot
+games %&gt;%
+  filter(Round == 10)%&gt;%
+  select(Points, Victories, Ties, Losses,
+         `Goals scored`, `Goals conceded`,
+         Position,Champ)%&gt;%
+  mutate_all(.funs = as.numeric)%&gt;%
+  mutate(Champ = factor(Champ, labels= c(&quot;Not champion&quot;,&quot;Champion&quot;)))%&gt;%
+  gather(key=&quot;Variable&quot;,value=&quot;value&quot;,-c(Champ))%&gt;%
+  mutate(y = if_else(Champ==&quot;Champion&quot;, value/13,value/ 270 ))%&gt;%
+  ggplot(aes(value,fill=Champ))+
+  #geom_point()+
+  geom_histogram(aes(y=..density..),binwidth = 1,col=1,alpha=.3)+
+  facet_wrap( ~Variable,scales = &quot;free&quot;)+
+  theme_light()+
+  scale_fill_discrete(&quot;&quot;)+
+  ylab(&quot;Frequency (%)&quot;)+
+  scale_y_continuous(labels = scales::percent)+
+  scale_x_continuous(breaks = seq(0,30,by=4))</code></pre>
+<p><img src="/post/2019-04-24-how-many-rounds-on-top-to-glory_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code># Making a table
+games %&gt;%
+  filter(Round == 10)%&gt;%
+  select(Points, Victories, Ties, Losses,
+         `Goals scored`, `Goals conceded`,
+         Position,Champ,Performance)%&gt;%
+  mutate_all(.funs = as.numeric)%&gt;%
+  mutate(Champ = factor(Champ, labels= c(&quot;Not champion&quot;,&quot;Champion&quot;)))%&gt;%
+  gather(key=&quot;Variable&quot;,value=&quot;value&quot;,-c(Champ))%&gt;%
+  filter(value&gt;=0)%&gt;%
+  group_by(Variable,Champ)%&gt;%
+  summarise(Min= min(value),Mean = mean(value),Max = max(value),
+            SD = sd(value))</code></pre>
+<pre><code>## # A tibble: 16 x 6
+## # Groups:   Variable [8]
+##    Variable       Champ          Min  Mean   Max    SD
+##    &lt;chr&gt;          &lt;fct&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 Goals conceded Not champion   4   13.3   26    3.89
+##  2 Goals conceded Champion       3   10.2   19    5.19
+##  3 Goals scored   Not champion   3   13.0   23    3.95
+##  4 Goals scored   Champion       8   16.9   27    5.04
+##  5 Losses         Not champion   0    3.66   8    1.62
+##  6 Losses         Champion       0    2.23   5    1.42
+##  7 Performance    Not champion   6.7 44.4   83.3 14.2 
+##  8 Performance    Champion      43.3 62.8   86.7 12.6 
+##  9 Points         Not champion   1   13.3   25    4.32
+## 10 Points         Champion      13   18.8   26    3.78
+## 11 Position       Not champion   1   11.3   24    6.02
+## 12 Position       Champion       1    4.31  11    3.35
+## 13 Ties           Not champion   0    2.84   7    1.31
+## 14 Ties           Champion       1    2.23   5    1.30
+## 15 Victories      Not champion   0    3.49   8    1.51
+## 16 Victories      Champion       3    5.54   8    1.39</code></pre>
+</div>
+</div>
+
+          </div>
+
+          
+          <div class="row">
+            <div class="col-md-8">
+            
+              <div class="mb-5">
+                
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="/tags/r" role="button">R </a></li>
+      
+    
+      <li><a href="/tags/soccer" role="button">soccer </a></li>
+      
+    
+      <li><a href="/tags/brazil" role="button">brazil </a></li>
+      
+    
+      <li><a href="/tags/statistics" role="button">statistics </a></li>
+      
+    
+      <li><a href="/tags/roc" role="button">ROC </a></li>
+      
+    
+      <li><a href="/tags/logistic-regression" role="button">logistic-regression </a></li>
+      
+    
+  </div>
+</div>
+              </div>
+            
+            </div>
+            
+          </div>
+          
+
+          
+          <div class="row pt-3">
+            <div class="col-md-6">
+              
+                <a href=/post/2019-04-24-using-xkcd-to-make-density-plots/ class="post-meta">Previous
+                  <div class="pt-2 pb-5 d-flex">
+                    <i class="fas fa-angle-left text-grey font-weight-bold mr-2 active-color"></i>
+                    <span>Using Xkcd to Make Density Plots</span>
+                  </div>
+                </a>
+              
+            </div>
+            
+            <div class="col-md-6 text-right" >
+              
+            </div>
+          </div>
+
+          
+
+        </div>
+        
+
+      </div>
+      
+
+      
+
+    </div>
+    
+
+
+  </main>
+  
+
+
+    
+    
+
+<footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+
+  
+  <div class="pb-2 mt-5 pt-5">
+    
+      <a href="//github.com/arthur-rocha " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+    
+    
+      <a href="//linkedin.com/in/arthur-cesar-rocha" target="_blank" rel="noopener"><i class="fab fa-linkedin-in mr-3" aria-hidden="true"></i></a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+    
+        <a href="mailto:arthurcesariv@gmail.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    
+
+    
+
+    
+
+  </div>
+  
+
+  
+  <div class="copyright py-4">
+    
+    <link rel="stylesheet" type="text/css" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+    <span>  2019 - 2019 &copy; | Made with  <i class="icon ion-heart"></i> using <i class="fab fa-github mr-3"></i> + <b>R</b>
+    
+ 
+    
+    
+    </span>
+  </div>
+  
+
+</footer>
+
+
+    
+
+
+
+
+
+
+<script type="text/javascript" src="/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/vendors/popper.min.js"></script>
+<script type="text/javascript" src="/js/vendors/holder.min.js"></script>
+<script type="text/javascript" src="/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+
+<script type="text/javascript" src="/js/vendors/mdb/mdb.min.js"></script>
+
+<script type="text/javascript" src="/js/main.js"></script>
+
+
+
+  
+  <script src="/js/vendors/highlight.pack.js"> </script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+ 
+  <script src="/js/vendors/katex/katex.min.js"> </script>
+  <script src="/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          renderMathInElement(document.body);
+      });
+  </script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  
+  new WOW().init();
+</script>
+
+
+
+
+  </body>
+</html>

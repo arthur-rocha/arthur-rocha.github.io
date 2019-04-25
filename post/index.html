@@ -257,6 +257,8 @@
 
   
 
+  
+
 
 
 
@@ -291,6 +293,8 @@
 
   
 
+  
+
 
 
 
@@ -311,10 +315,16 @@
         
         
         
-            <li><a href="/tags/r" role="button"><span>r (2)</span></a></li>
+            <li><a href="/tags/r" role="button"><span>r (3)</span></a></li>
+          
+        
+            <li><a href="/tags/statistics" role="button"><span>statistics (2)</span></a></li>
           
         
             <li><a href="/tags/blogdown" role="button"><span>blogdown (1)</span></a></li>
+          
+        
+            <li><a href="/tags/brazil" role="button"><span>brazil (1)</span></a></li>
           
         
             <li><a href="/tags/density" role="button"><span>density (1)</span></a></li>
@@ -323,7 +333,13 @@
             <li><a href="/tags/hugo" role="button"><span>hugo (1)</span></a></li>
           
         
-            <li><a href="/tags/statistics" role="button"><span>statistics (1)</span></a></li>
+            <li><a href="/tags/logistic-regression" role="button"><span>logistic-regression (1)</span></a></li>
+          
+        
+            <li><a href="/tags/roc" role="button"><span>roc (1)</span></a></li>
+          
+        
+            <li><a href="/tags/soccer" role="button"><span>soccer (1)</span></a></li>
           
         
             <li><a href="/tags/xkcd" role="button"><span>xkcd (1)</span></a></li>
@@ -362,7 +378,7 @@
               
                 <div class="px-2 middot"></div>
                 <div>
-                  2 posts
+                  3 posts
                 </div>
               
             </div>
@@ -436,6 +452,78 @@ My goal here is to make density plots of the most common probability functions u
       
     
       <li><a href="/tags/statistics" role="button">statistics </a></li>
+      
+    
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+</div>
+
+          
+              <div class="post-wrapper white-bg post-card">
+  
+  <a href="/post/2019-04-24-how-many-rounds-on-top-to-glory/">
+    <div class="post-header text-center">
+      <div class="px-4 post-heading">How many rounds on top are necessary to be a soccer champion?</div>
+      <ul class="post-meta li-x mt-1">
+        
+          <li>Apr 24, 2019</li>
+        
+    
+        
+          <li class="middot"></li>
+          <li>6 minutes read</li>
+        
+      </ul>
+    </div>
+    
+
+    
+      IntroductionLike almost everyone here in Brazil, I have a passion for football (or soccer) and because of that my father and I are always alert to the national championship.
+So, a few days ago my father gave me a challenge, he challenged me to understand what is needed to be a champion in the brazilian national soccer league (knowed here as “Brasileirão”) since the competition change its format to a point based championship in 2003.Thus I’ve accepted the challenge and here are the results:
+DataFirstly we need to get the data!!I haven’t found a well structured data base to work with, so I had to work with the information provided by this site http://futpedia.globo.com/campeonato/campeonato-brasileiro/ andI had to do a function to scrap the data.
+Packages usedlibrary(XML) #Package to do web scrapinglibrary(dplyr) #Manipulationlibrary(magrittr) #Manipulationlibrary(tidyr) #Manipulationlibrary(ggplot2) #PlotsThat is the function to do the web scraping. Note that the site has information only until 2015.# URL base to all yearsurl1=&#34;http://futpedia.globo.com/campeonato/campeonato-brasileiro/&#34;#Empty data frame to store the informationgames= data_frame()for (i in 2003:2015) { ## yearsurl2 = paste0(url1,i)readHTMLTable(url2,as.data.frame = T)%&gt;%data.......
+    
+  </a>
+
+  
+  
+  <div class="post-meta li-x mt-2 div-x">
+    <div>
+      
+        
+          <li><a href="/categories/cool-stuff"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> Cool stuff </a></li>
+        
+      
+      
+    </div>
+   
+    <div>
+      
+        
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="/tags/r" role="button">R </a></li>
+      
+    
+      <li><a href="/tags/soccer" role="button">soccer </a></li>
+      
+    
+      <li><a href="/tags/brazil" role="button">brazil </a></li>
+      
+    
+      <li><a href="/tags/statistics" role="button">statistics </a></li>
+      
+    
+      <li><a href="/tags/roc" role="button">ROC </a></li>
+      
+    
+      <li><a href="/tags/logistic-regression" role="button">logistic-regression </a></li>
       
     
   </div>

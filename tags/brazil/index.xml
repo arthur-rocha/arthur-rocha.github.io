@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>statistics on Arthur Rocha</title>
-    <link>/tags/statistics/</link>
-    <description>Recent content in statistics on Arthur Rocha</description>
+    <title>brazil on Arthur Rocha</title>
+    <link>/tags/brazil/</link>
+    <description>Recent content in brazil on Arthur Rocha</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
     <lastBuildDate>Wed, 24 Apr 2019 12:03:06 -0300</lastBuildDate>
     
-	<atom:link href="/tags/statistics/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/brazil/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -21,17 +21,6 @@
 So, a few days ago my father gave me a challenge, he challenged me to understand what is needed to be a champion in the brazilian national soccer league (knowed here as “Brasileirão”) since the competition change its format to a point based championship in 2003.Thus I’ve accepted the challenge and here are the results:
 DataFirstly we need to get the data!!I haven’t found a well structured data base to work with, so I had to work with the information provided by this site http://futpedia.globo.com/campeonato/campeonato-brasileiro/ andI had to do a function to scrap the data.
 Packages usedlibrary(XML) #Package to do web scrapinglibrary(dplyr) #Manipulationlibrary(magrittr) #Manipulationlibrary(tidyr) #Manipulationlibrary(ggplot2) #PlotsThat is the function to do the web scraping. Note that the site has information only until 2015.# URL base to all yearsurl1=&amp;quot;http://futpedia.globo.com/campeonato/campeonato-brasileiro/&amp;quot;#Empty data frame to store the informationgames= data_frame()for (i in 2003:2015) { ## yearsurl2 = paste0(url1,i)readHTMLTable(url2,as.data.frame = T)%&amp;gt;%data.</description>
-    </item>
-    
-    <item>
-      <title>Using Xkcd to Make Density Plots</title>
-      <link>/post/2019-04-24-using-xkcd-to-make-density-plots/</link>
-      <pubDate>Wed, 24 Apr 2019 12:03:06 -0300</pubDate>
-      
-      <guid>/post/2019-04-24-using-xkcd-to-make-density-plots/</guid>
-      <description>So, I’ve always been interesting in the “xkcd type” of figures only because IT’S FUN.
-My goal here is to make density plots of the most common probability functions using the xkcd style.
-First of all, we will need to load these packages:library(xkcd)library(dplyr)library(ggplot2)Now, we do a function using the ggplot2 sintax to make the plot. Note that we need calculate the axes ranges and apply “jitter” to x and y to create a hand-drawn effect in the line.xkcd_density = function(x,y){# Calcule the axis rangexrange = range(x)yrange = range(y)# Plot line type + jitterqplot(jitter(x),jitter(y),geom = &amp;quot;blank&amp;quot;)+geom_line(linetype = 1,size=1.5)+theme_xkcd()+xkcdaxis(xrange,yrange)+xlab(&amp;quot;&amp;quot;)+ylab(&amp;quot;&amp;quot;)}Ploting the standart normal (0,1) density.x = seq(-3,3,by=.1)y = dnorm(x,mean=0,sd=1)xkcd_density(x,y)Ploting the Chi square (df = 3) desity.x = c(0,seq(0.1,10,by=.1))y = c(0,dchisq(x[-1],df=3))xkcd_density(x,y)There you have! A nice looking (sort of) xkcd density plot!</description>
     </item>
     
   </channel>

@@ -1,0 +1,230 @@
+---
+title: "How many rounds on top are necessary to be a soccer champion?"
+author: "Arthur Rocha"
+date: "2019-04-24T12:03:06-03:00"
+categories:
+  - Cool stuff
+tags:
+  - R
+  - soccer
+  - brazil
+  - statistics
+  - ROC
+  - logistic-regression
+output: html_document
+---
+
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<ul>
+<li>Like almost everyone here in Brazil, I have a passion for football (or soccer) and because of that my father and I are always alert to the national championship.<br />
+So, a few days ago my father gave me a challenge, he challenged me to understand what is needed to be a champion in the brazilian national soccer league (knowed here as “Brasileirão”) since the competition change its format to a point based championship in 2003.</li>
+</ul>
+<p>Thus I’ve accepted the challenge and here are the results:</p>
+</div>
+<div id="data" class="section level2">
+<h2>Data</h2>
+<ul>
+<li>Firstly we need to get the data!!</li>
+</ul>
+<p>I haven’t found a well structured data base to work with, so I had to work with the information provided by this site <a href="http://futpedia.globo.com/campeonato/campeonato-brasileiro/">http://futpedia.globo.com/campeonato/campeonato-brasileiro/</a> and
+I had to do a function to scrap the data.</p>
+<ul>
+<li>Packages used</li>
+</ul>
+<pre class="r"><code>library(XML)      #Package to do web scraping
+library(dplyr)    #Manipulation
+library(magrittr) #Manipulation
+library(tidyr)    #Manipulation
+library(ggplot2)  #Plots</code></pre>
+<ul>
+<li>That is the function to do the web scraping. Note that the site has information only until 2015.</li>
+</ul>
+<pre class="r"><code># URL base to all years
+url1=&quot;http://futpedia.globo.com/campeonato/campeonato-brasileiro/&quot;
+
+#Empty data frame to store the information
+games= data_frame()
+
+for (i in 2003:2015) { ## years
+  url2 = paste0(url1,i)
+  
+  readHTMLTable(url2,as.data.frame = T)%&gt;%
+    data.table::rbindlist()%&gt;%
+    setNames(c(&quot;Position&quot;,&quot;Team&quot;,&quot;Points&quot;,&quot;Games&quot;,&quot;Victories&quot;,&quot;Ties&quot;,
+               &quot;Losses&quot;,&quot;Goals scored&quot;,&quot;Goals conceded&quot;,&quot;Goal difference&quot;,
+               &quot;Performance&quot;))%&gt;%
+    mutate(Year = i)%&gt;%
+    bind_rows(games) -&gt; games
+}</code></pre>
+<p>If you don’t want to scrap the data (because take some time and sometimes don’t work so fine) you can get it from here <a href="https://github.com/arthur-rocha/Brasileirao/raw/master/Brasileirao%202003%20-%202015.csv">Data!</a>.</p>
+<p><strong>Tip:</strong> Be aware with the encoding!</p>
+<ul>
+<li>Moving on, we need some extra information, like which team was the champion in the season and how many games (rounds) are in each season, because the number of teams has changed in 2005 and changed again in 2006.</li>
+</ul>
+<pre class="r"><code># Champions data
+champ_dt = data_frame(Year = 2003:2018,
+                      Champion = c(&quot;Cruzeiro&quot;,&quot;Santos&quot;,&quot;Corinthians&quot;,&quot;São Paulo&quot;,
+                                   &quot;São Paulo&quot;,&quot;São Paulo&quot;,&quot;Flamengo&quot;,&quot;Fluminense&quot;,
+                                   &quot;Corinthians&quot;,&quot;Fluminense&quot;,&quot;Cruzeiro&quot;,&quot;Cruzeiro&quot;,
+                                   &quot;Corinthians&quot;,&quot;Palmeiras&quot;,&quot;Corinthias&quot;,&quot;Palmeiras&quot;))</code></pre>
+<pre class="r"><code>games %&lt;&gt;%  # Tracking the round (game) number
+  mutate(Round = c(rep(rep(1:38,each =20),10),
+                   rep(1:42,each =22),
+                   rep(1:46,each =24),rep(1:46,each =24)))%&gt;%
+  
+  # Finding the champion in each season
+  inner_join(champ_dt) %&gt;%
+  # Is this team the champion of this year?
+  mutate(Champ = if_else(Team == Champion, 1,0),
+         # Total number of games in the season
+         N_round = case_when(Year &lt; 2005 ~ 46,
+                             Year == 2005 ~ 42,
+                             Year &gt; 2005 ~38),
+         # In this round, this team is in the first place?
+         First_place = if_else(Position ==1,1,0 ),
+         # In this round, this team is in the first place
+         # and is the champion?
+         TP = if_else(First_place == 1 &amp; Champ == 1,
+                      1,0),
+         # In this round, this team is in the first place
+         # and isn&#39;t the champion?
+         TN = if_else(First_place == 1 &amp; Champ == 1,
+                      1,0))</code></pre>
+<ul>
+<li>Let’s take a look in the data</li>
+</ul>
+<pre class="r"><code>head(games)</code></pre>
+<pre><code>## # A tibble: 6 x 19
+##   Position Team  Points Games Victories  Ties Losses `Goals scored`
+##      &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;          &lt;dbl&gt;
+## 1        1 Sport      3     1         1     0      0              4
+## 2        2 Athl~      3     1         1     0      0              3
+## 3        3 Chap~      3     1         1     0      0              2
+## 4        3 &quot;S\x~      3     1         1     0      0              2
+## 5        5 Cori~      3     1         1     0      0              1
+## 6        6 Flum~      3     1         1     0      0              1
+## # ... with 11 more variables: `Goals conceded` &lt;dbl&gt;, `Goal
+## #   difference` &lt;dbl&gt;, Performance &lt;dbl&gt;, Year &lt;dbl&gt;, Round &lt;dbl&gt;,
+## #   Champion &lt;chr&gt;, Champ &lt;dbl&gt;, N_round &lt;dbl&gt;, First_place &lt;dbl&gt;,
+## #   TP &lt;dbl&gt;, TN &lt;dbl&gt;</code></pre>
+<p>All seems ok, let’s continue…</p>
+</div>
+<div id="analysing-the-initial-rounds." class="section level2">
+<h2>Analysing the initial rounds.</h2>
+<ul>
+<li>So, now we can analyse the data. Initially, we can try to find the “champion profile” at the 5th and 10th round.</li>
+</ul>
+<div id="th-round" class="section level3">
+<h3>5th round:</h3>
+<pre class="r"><code># Making a plot
+games %&gt;%
+  filter(Round == 5)%&gt;%
+  select(Points, Victories, Ties, Losses,
+         `Goals scored`, `Goals conceded`,
+         Position,Champ)%&gt;%
+  mutate_all(.funs = as.numeric)%&gt;%
+  mutate(Champ = factor(Champ, labels= c(&quot;Not champion&quot;,&quot;Champion&quot;)))%&gt;%
+  gather(key=&quot;Variable&quot;,value=&quot;value&quot;,-c(Champ))%&gt;%
+  ggplot(aes(value,fill=Champ))+
+  geom_histogram(aes(y=..density..),binwidth = 1,col=1,alpha=.3)+
+  facet_wrap( ~Variable,scales = &quot;free&quot;)+
+  theme_light()+
+  scale_fill_discrete(&quot;&quot;)+
+  ylab(&quot;Frequency (%)&quot;)+
+  scale_y_continuous(labels = scales::percent)</code></pre>
+<p><img src="/post/2019-04-24-how-many-rounds-on-top-to-glory_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code># Making a table
+games %&gt;%
+  filter(Round == 5)%&gt;%
+  select(Points, Victories, Ties, Losses,
+         `Goals scored`, `Goals conceded`,
+         Position,Champ,Performance)%&gt;%
+  mutate_all(.funs = as.numeric)%&gt;%
+  mutate(Champ = factor(Champ, labels= c(&quot;Not champion&quot;,&quot;Champion&quot;)))%&gt;%
+  gather(key=&quot;Variable&quot;,value=&quot;value&quot;,-c(Champ))%&gt;%
+  filter(value&gt;=0)%&gt;%
+  group_by(Variable,Champ)%&gt;%
+  summarise(Min= min(value),Mean = mean(value),Max = max(value),
+            SD = sd(value))</code></pre>
+<pre><code>## # A tibble: 16 x 6
+## # Groups:   Variable [8]
+##    Variable       Champ          Min  Mean   Max     SD
+##    &lt;chr&gt;          &lt;fct&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Goals conceded Not champion     1  6.59  17    2.95 
+##  2 Goals conceded Champion         2  6     12    2.83 
+##  3 Goals scored   Not champion     1  6.49  16    2.71 
+##  4 Goals scored   Champion         3  7.92  17    3.59 
+##  5 Losses         Not champion     0  1.77   5    1.10 
+##  6 Losses         Champion         0  1.38   3    0.961
+##  7 Performance    Not champion     0 44.4  100   19.7  
+##  8 Performance    Champion        40 55.9   86.7 13.8  
+##  9 Points         Not champion     0  6.69  15    2.98 
+## 10 Points         Champion         6  8.38  13    2.06 
+## 11 Position       Not champion     1 11.1   24    6.11 
+## 12 Position       Champion         1  7.23  15    4.40 
+## 13 Ties           Not champion     0  1.52   4    0.960
+## 14 Ties           Champion         0  1.23   3    1.01 
+## 15 Victories      Not champion     0  1.72   5    1.07 
+## 16 Victories      Champion         1  2.38   4    0.768</code></pre>
+<p>Here we can see that, at the 5th round, all the champions have woned at least one game, and drawn at least one game too.</p>
+</div>
+<div id="th-round-1" class="section level3">
+<h3>10th round:</h3>
+<pre class="r"><code># Making a plot
+games %&gt;%
+  filter(Round == 10)%&gt;%
+  select(Points, Victories, Ties, Losses,
+         `Goals scored`, `Goals conceded`,
+         Position,Champ)%&gt;%
+  mutate_all(.funs = as.numeric)%&gt;%
+  mutate(Champ = factor(Champ, labels= c(&quot;Not champion&quot;,&quot;Champion&quot;)))%&gt;%
+  gather(key=&quot;Variable&quot;,value=&quot;value&quot;,-c(Champ))%&gt;%
+  mutate(y = if_else(Champ==&quot;Champion&quot;, value/13,value/ 270 ))%&gt;%
+  ggplot(aes(value,fill=Champ))+
+  #geom_point()+
+  geom_histogram(aes(y=..density..),binwidth = 1,col=1,alpha=.3)+
+  facet_wrap( ~Variable,scales = &quot;free&quot;)+
+  theme_light()+
+  scale_fill_discrete(&quot;&quot;)+
+  ylab(&quot;Frequency (%)&quot;)+
+  scale_y_continuous(labels = scales::percent)+
+  scale_x_continuous(breaks = seq(0,30,by=4))</code></pre>
+<p><img src="/post/2019-04-24-how-many-rounds-on-top-to-glory_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code># Making a table
+games %&gt;%
+  filter(Round == 10)%&gt;%
+  select(Points, Victories, Ties, Losses,
+         `Goals scored`, `Goals conceded`,
+         Position,Champ,Performance)%&gt;%
+  mutate_all(.funs = as.numeric)%&gt;%
+  mutate(Champ = factor(Champ, labels= c(&quot;Not champion&quot;,&quot;Champion&quot;)))%&gt;%
+  gather(key=&quot;Variable&quot;,value=&quot;value&quot;,-c(Champ))%&gt;%
+  filter(value&gt;=0)%&gt;%
+  group_by(Variable,Champ)%&gt;%
+  summarise(Min= min(value),Mean = mean(value),Max = max(value),
+            SD = sd(value))</code></pre>
+<pre><code>## # A tibble: 16 x 6
+## # Groups:   Variable [8]
+##    Variable       Champ          Min  Mean   Max    SD
+##    &lt;chr&gt;          &lt;fct&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 Goals conceded Not champion   4   13.3   26    3.89
+##  2 Goals conceded Champion       3   10.2   19    5.19
+##  3 Goals scored   Not champion   3   13.0   23    3.95
+##  4 Goals scored   Champion       8   16.9   27    5.04
+##  5 Losses         Not champion   0    3.66   8    1.62
+##  6 Losses         Champion       0    2.23   5    1.42
+##  7 Performance    Not champion   6.7 44.4   83.3 14.2 
+##  8 Performance    Champion      43.3 62.8   86.7 12.6 
+##  9 Points         Not champion   1   13.3   25    4.32
+## 10 Points         Champion      13   18.8   26    3.78
+## 11 Position       Not champion   1   11.3   24    6.02
+## 12 Position       Champion       1    4.31  11    3.35
+## 13 Ties           Not champion   0    2.84   7    1.31
+## 14 Ties           Champion       1    2.23   5    1.30
+## 15 Victories      Not champion   0    3.49   8    1.51
+## 16 Victories      Champion       3    5.54   8    1.39</code></pre>
+</div>
+</div>
