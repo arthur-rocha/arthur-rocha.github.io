@@ -49,11 +49,11 @@ pygmentsuseclasses         = true
     url                    = "/projects"  
 
   
-  [[menu.main]]
-    name                   = "Contact"
-    weight                 = -90
-    identifier             = "contact"
-    url                    = "/contact" 
+  #[[menu.main]]
+  #  name                   = "Contact"
+  #  weight                 = -90
+  #  identifier             = "contact"
+  #  url                    = "/contact" 
 
  
 
