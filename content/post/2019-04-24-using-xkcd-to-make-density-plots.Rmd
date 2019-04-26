@@ -57,7 +57,7 @@ y = dnorm(x,mean=0,sd=1)
 xkcd_density(x,y)
 ```
 
-- Ploting the Chi square (df = 3) desity.
+- Ploting the Chi square (df = 3) density.
 
 ```{r}
 x = c(0,seq(0.1,10,by=.1))

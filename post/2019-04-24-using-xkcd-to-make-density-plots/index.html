@@ -9,12 +9,12 @@
   <meta name="author" content="Arthur Rocha">
   <meta name="description" content="So, I’ve always been interesting in the “xkcd type” of figures only because IT’S FUN.
 My goal here is to make density plots of the most common probability functions using the xkcd style.
-First of all, we will need to load these packages:library(xkcd)library(dplyr)library(ggplot2)Now, we do a function using the ggplot2 sintax to make the plot. Note that we need calculate the axes ranges and apply “jitter” to x and y to create a hand-drawn effect in the line.xkcd_density = function(x,y){# Calcule the axis rangexrange = range(x)yrange = range(y)# Plot line type &#43; jitterqplot(jitter(x),jitter(y),geom = &quot;blank&quot;)&#43;geom_line(linetype = 1,size=1.5)&#43;theme_xkcd()&#43;xkcdaxis(xrange,yrange)&#43;xlab(&quot;&quot;)&#43;ylab(&quot;&quot;)}Ploting the standart normal (0,1) density.x = seq(-3,3,by=.1)y = dnorm(x,mean=0,sd=1)xkcd_density(x,y)Ploting the Chi square (df = 3) desity.x = c(0,seq(0.1,10,by=.1))y = c(0,dchisq(x[-1],df=3))xkcd_density(x,y)There you have! A nice looking (sort of) xkcd density plot!">
+First of all, we will need to load these packages:library(xkcd)library(dplyr)library(ggplot2)Now, we do a function using the ggplot2 sintax to make the plot. Note that we need calculate the axes ranges and apply “jitter” to x and y to create a hand-drawn effect in the line.xkcd_density = function(x,y){# Calcule the axis rangexrange = range(x)yrange = range(y)# Plot line type &#43; jitterqplot(jitter(x),jitter(y),geom = &quot;blank&quot;)&#43;geom_line(linetype = 1,size=1.5)&#43;theme_xkcd()&#43;xkcdaxis(xrange,yrange)&#43;xlab(&quot;&quot;)&#43;ylab(&quot;&quot;)}Ploting the standart normal (0,1) density.x = seq(-3,3,by=.1)y = dnorm(x,mean=0,sd=1)xkcd_density(x,y)Ploting the Chi square (df = 3) density.x = c(0,seq(0.1,10,by=.1))y = c(0,dchisq(x[-1],df=3))xkcd_density(x,y)There you have! A nice looking (sort of) xkcd density plot!">
   
   <meta property="og:title" content="Using Xkcd to Make Density Plots" />
 <meta property="og:description" content="So, I’ve always been interesting in the “xkcd type” of figures only because IT’S FUN.
 My goal here is to make density plots of the most common probability functions using the xkcd style.
-First of all, we will need to load these packages:library(xkcd)library(dplyr)library(ggplot2)Now, we do a function using the ggplot2 sintax to make the plot. Note that we need calculate the axes ranges and apply “jitter” to x and y to create a hand-drawn effect in the line.xkcd_density = function(x,y){# Calcule the axis rangexrange = range(x)yrange = range(y)# Plot line type &#43; jitterqplot(jitter(x),jitter(y),geom = &quot;blank&quot;)&#43;geom_line(linetype = 1,size=1.5)&#43;theme_xkcd()&#43;xkcdaxis(xrange,yrange)&#43;xlab(&quot;&quot;)&#43;ylab(&quot;&quot;)}Ploting the standart normal (0,1) density.x = seq(-3,3,by=.1)y = dnorm(x,mean=0,sd=1)xkcd_density(x,y)Ploting the Chi square (df = 3) desity.x = c(0,seq(0.1,10,by=.1))y = c(0,dchisq(x[-1],df=3))xkcd_density(x,y)There you have! A nice looking (sort of) xkcd density plot!" />
+First of all, we will need to load these packages:library(xkcd)library(dplyr)library(ggplot2)Now, we do a function using the ggplot2 sintax to make the plot. Note that we need calculate the axes ranges and apply “jitter” to x and y to create a hand-drawn effect in the line.xkcd_density = function(x,y){# Calcule the axis rangexrange = range(x)yrange = range(y)# Plot line type &#43; jitterqplot(jitter(x),jitter(y),geom = &quot;blank&quot;)&#43;geom_line(linetype = 1,size=1.5)&#43;theme_xkcd()&#43;xkcdaxis(xrange,yrange)&#43;xlab(&quot;&quot;)&#43;ylab(&quot;&quot;)}Ploting the standart normal (0,1) density.x = seq(-3,3,by=.1)y = dnorm(x,mean=0,sd=1)xkcd_density(x,y)Ploting the Chi square (df = 3) density.x = c(0,seq(0.1,10,by=.1))y = c(0,dchisq(x[-1],df=3))xkcd_density(x,y)There you have! A nice looking (sort of) xkcd density plot!" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/2019-04-24-using-xkcd-to-make-density-plots/" />
 <meta property="article:published_time" content="2019-04-24T12:03:06-03:00"/>
@@ -326,7 +326,7 @@ y = dnorm(x,mean=0,sd=1)
 xkcd_density(x,y)</code></pre>
 <p><img src="/post/2019-04-24-using-xkcd-to-make-density-plots_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <ul>
-<li>Ploting the Chi square (df = 3) desity.</li>
+<li>Ploting the Chi square (df = 3) density.</li>
 </ul>
 <pre class="r"><code>x = c(0,seq(0.1,10,by=.1))
 y = c(0,dchisq(x[-1],df=3))
