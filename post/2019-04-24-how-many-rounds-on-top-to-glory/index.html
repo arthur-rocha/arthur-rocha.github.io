@@ -10,13 +10,13 @@
   <meta name="description" content="IntroductionLike almost everyone here in Brazil, I have a passion for football (or soccer) and because of that my father and I are always alert to the national championship.
 So, a few days ago my father gave me a challenge, he challenged me to understand what is needed to be a champion in the brazilian national soccer league (knowed here as “Brasileirão”) since the competition change its format to a point based championship in 2003.Thus I’ve accepted the challenge and here are the results:
 DataFirstly we need to get the data!!I haven’t found a well structured data base to work with, so I had to work with the information provided by this site http://futpedia.globo.com/campeonato/campeonato-brasileiro/ andI had to do a function to scrap the data.
-Packages usedlibrary(XML) #Package to do web scrapinglibrary(dplyr) #Manipulationlibrary(magrittr) #Manipulationlibrary(tidyr) #Manipulationlibrary(scales) #Formattinglibrary(ggplot2) #Plotslibrary(DT) #Tableslibrary(pROC) #ROC curvesThat is the function to do the web scraping. Note that the site has information only until 2015.# URL base to all yearsurl1=&quot;http://futpedia.globo.com/campeonato/campeonato-brasileiro/&quot;#Empty data frame to store the informationgames= data_frame()for (i in 2003:2015) { ## yearsurl2 = paste0(url1,i)readHTMLTable(url2,as.">
+Packages usedlibrary(XML) #Package to do web scrapinglibrary(dplyr) #Manipulationlibrary(magrittr) #Manipulationlibrary(tidyr) #Manipulationlibrary(scales) #Formattinglibrary(ggplot2) #Plotslibrary(pROC) #ROC curvesThat is the function to do the web scraping. Note that the site has information only until 2015.# URL base to all yearsurl1=&quot;http://futpedia.globo.com/campeonato/campeonato-brasileiro/&quot;#Empty data frame to store the informationgames= data_frame()for (i in 2003:2015) { ## yearsurl2 = paste0(url1,i)readHTMLTable(url2,as.">
   
   <meta property="og:title" content="How many rounds on top are necessary to be a soccer champion?" />
 <meta property="og:description" content="IntroductionLike almost everyone here in Brazil, I have a passion for football (or soccer) and because of that my father and I are always alert to the national championship.
 So, a few days ago my father gave me a challenge, he challenged me to understand what is needed to be a champion in the brazilian national soccer league (knowed here as “Brasileirão”) since the competition change its format to a point based championship in 2003.Thus I’ve accepted the challenge and here are the results:
 DataFirstly we need to get the data!!I haven’t found a well structured data base to work with, so I had to work with the information provided by this site http://futpedia.globo.com/campeonato/campeonato-brasileiro/ andI had to do a function to scrap the data.
-Packages usedlibrary(XML) #Package to do web scrapinglibrary(dplyr) #Manipulationlibrary(magrittr) #Manipulationlibrary(tidyr) #Manipulationlibrary(scales) #Formattinglibrary(ggplot2) #Plotslibrary(DT) #Tableslibrary(pROC) #ROC curvesThat is the function to do the web scraping. Note that the site has information only until 2015.# URL base to all yearsurl1=&quot;http://futpedia.globo.com/campeonato/campeonato-brasileiro/&quot;#Empty data frame to store the informationgames= data_frame()for (i in 2003:2015) { ## yearsurl2 = paste0(url1,i)readHTMLTable(url2,as." />
+Packages usedlibrary(XML) #Package to do web scrapinglibrary(dplyr) #Manipulationlibrary(magrittr) #Manipulationlibrary(tidyr) #Manipulationlibrary(scales) #Formattinglibrary(ggplot2) #Plotslibrary(pROC) #ROC curvesThat is the function to do the web scraping. Note that the site has information only until 2015.# URL base to all yearsurl1=&quot;http://futpedia.globo.com/campeonato/campeonato-brasileiro/&quot;#Empty data frame to store the informationgames= data_frame()for (i in 2003:2015) { ## yearsurl2 = paste0(url1,i)readHTMLTable(url2,as." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/2019-04-24-how-many-rounds-on-top-to-glory/" />
 <meta property="article:published_time" content="2019-04-24T12:03:06-03:00"/>
@@ -278,7 +278,7 @@ So, a few days ago my father gave me a challenge, he challenged me to understand
 
     
       <li class="middot"></li>
-      <li>7 minutes read</li>
+      <li>9 minutes read</li>
     
   </ul>
   
@@ -288,15 +288,6 @@ So, a few days ago my father gave me a challenge, he challenged me to understand
 
           <div class="post-content markdown">
             
-<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
-<script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
-<link href="/rmarkdown-libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/datatables-binding/datatables.js"></script>
-<link href="/rmarkdown-libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="/rmarkdown-libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/dt-core/js/jquery.dataTables.min.js"></script>
-<link href="/rmarkdown-libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/crosstalk/js/crosstalk.min.js"></script>
 
 
 <div id="introduction" class="section level2">
@@ -323,7 +314,6 @@ library(magrittr) #Manipulation
 library(tidyr)    #Manipulation
 library(scales)   #Formatting
 library(ggplot2)  #Plots
-library(DT)       #Tables
 library(pROC)     #ROC curves</code></pre>
 <ul>
 <li>That is the function to do the web scraping. Note that the site has information only until 2015.</li>
@@ -383,10 +373,181 @@ champ_dt = data_frame(Year = 2003:2018,
 <li>Let’s take a look in the data</li>
 </ul>
 <pre class="r"><code>head(games)%&gt;%
-  datatable()</code></pre>
-<p><div id="htmlwidget-1" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1">{"x":{"filter":"none","data":[["1","2","3","4","5","6"],[1,2,3,3,5,6],["Sport","Athletico-PR","Chapecoense","São Paulo","Corinthians","Fluminense"],[3,3,3,3,3,3],[1,1,1,1,1,1],[1,1,1,1,1,1],[0,0,0,0,0,0],[0,0,0,0,0,0],[4,3,2,2,1,1],[1,0,1,1,0,0],[3,3,1,1,1,1],["100.0","100.0","100.0","100.0","100.0","100.0"],[2015,2015,2015,2015,2015,2015],[1,1,1,1,1,1],["Corinthians","Corinthians","Corinthians","Corinthians","Corinthians","Corinthians"],[0,0,0,0,1,0],[38,38,38,38,38,38],[1,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Position<\/th>\n      <th>Team<\/th>\n      <th>Points<\/th>\n      <th>Games<\/th>\n      <th>Victories<\/th>\n      <th>Ties<\/th>\n      <th>Losses<\/th>\n      <th>Goals scored<\/th>\n      <th>Goals conceded<\/th>\n      <th>Goal difference<\/th>\n      <th>Performance<\/th>\n      <th>Year<\/th>\n      <th>Round<\/th>\n      <th>Champion<\/th>\n      <th>Champ<\/th>\n      <th>N_round<\/th>\n      <th>First_place<\/th>\n      <th>TP<\/th>\n      <th>TN<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,3,4,5,6,7,8,9,10,12,13,15,16,17,18,19]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-All seems ok, let’s continue…</p>
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Position</th>
+<th align="left">Team</th>
+<th align="right">Points</th>
+<th align="right">Games</th>
+<th align="right">Victories</th>
+<th align="right">Ties</th>
+<th align="right">Losses</th>
+<th align="right">Goals scored</th>
+<th align="right">Goals conceded</th>
+<th align="right">Goal difference</th>
+<th align="left">Performance</th>
+<th align="right">Year</th>
+<th align="right">Round</th>
+<th align="left">Champion</th>
+<th align="right">Champ</th>
+<th align="right">N_round</th>
+<th align="right">First_place</th>
+<th align="right">TP</th>
+<th align="right">TN</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">Sport</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="left">100.0</td>
+<td align="right">2015</td>
+<td align="right">1</td>
+<td align="left">Corinthians</td>
+<td align="right">0</td>
+<td align="right">38</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">Athletico-PR</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="left">100.0</td>
+<td align="right">2015</td>
+<td align="right">1</td>
+<td align="left">Corinthians</td>
+<td align="right">0</td>
+<td align="right">38</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">Chapecoense</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">100.0</td>
+<td align="right">2015</td>
+<td align="right">1</td>
+<td align="left">Corinthians</td>
+<td align="right">0</td>
+<td align="right">38</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="left">São Paulo</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">100.0</td>
+<td align="right">2015</td>
+<td align="right">1</td>
+<td align="left">Corinthians</td>
+<td align="right">0</td>
+<td align="right">38</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="left">Corinthians</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">100.0</td>
+<td align="right">2015</td>
+<td align="right">1</td>
+<td align="left">Corinthians</td>
+<td align="right">1</td>
+<td align="right">38</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="left">Fluminense</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">100.0</td>
+<td align="right">2015</td>
+<td align="right">1</td>
+<td align="left">Corinthians</td>
+<td align="right">0</td>
+<td align="right">38</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">All seems o</td>
+<td align="left">k, let’s contin</td>
+<td align="right">ue…</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="left"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="left"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="analysing-the-initial-rounds." class="section level2">
 <h2>Analysing the initial rounds.</h2>
@@ -425,9 +586,149 @@ games %&gt;%
   group_by(Variable,Champ)%&gt;%
   summarise(Min= min(value),Mean = mean(value),Max = max(value),
             SD = sd(value))%&gt;%
-  datatable()</code></pre>
-<div id="htmlwidget-2" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"],["Goals conceded","Goals conceded","Goals scored","Goals scored","Losses","Losses","Performance","Performance","Points","Points","Position","Position","Ties","Ties","Victories","Victories"],["Not champion","Champion","Not champion","Champion","Not champion","Champion","Not champion","Champion","Not champion","Champion","Not champion","Champion","Not champion","Champion","Not champion","Champion"],[1,2,1,3,0,0,1,196,0,6,1,1,0,0,0,1],[6.5875486381323,6,6.49027237354086,7.92307692307692,1.76653696498054,1.38461538461538,252.63813229572,330.307692307692,6.68627450980392,8.38461538461539,11.1128404669261,7.23076923076923,1.51750972762646,1.23076923076923,1.715953307393,2.38461538461538],[17,12,16,17,5,3,515,515,15,13,24,15,4,3,5,4],[2.95426079721758,2.82842712474619,2.71297927860643,3.59308452589922,1.10395634024508,0.960768922830523,146.095903678023,105.872867641167,2.97688070692215,2.06310694255297,6.10830877091655,4.39988344833978,0.960491423344875,1.01273936708367,1.07213388171034,0.767947647788304]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Variable<\/th>\n      <th>Champ<\/th>\n      <th>Min<\/th>\n      <th>Mean<\/th>\n      <th>Max<\/th>\n      <th>SD<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Champ</th>
+<th align="right">Min</th>
+<th align="right">Mean</th>
+<th align="right">Max</th>
+<th align="right">SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Goals conceded</td>
+<td align="left">Not champion</td>
+<td align="right">1</td>
+<td align="right">6.587549</td>
+<td align="right">17</td>
+<td align="right">2.9542608</td>
+</tr>
+<tr class="even">
+<td align="left">Goals conceded</td>
+<td align="left">Champion</td>
+<td align="right">2</td>
+<td align="right">6.000000</td>
+<td align="right">12</td>
+<td align="right">2.8284271</td>
+</tr>
+<tr class="odd">
+<td align="left">Goals scored</td>
+<td align="left">Not champion</td>
+<td align="right">1</td>
+<td align="right">6.490272</td>
+<td align="right">16</td>
+<td align="right">2.7129793</td>
+</tr>
+<tr class="even">
+<td align="left">Goals scored</td>
+<td align="left">Champion</td>
+<td align="right">3</td>
+<td align="right">7.923077</td>
+<td align="right">17</td>
+<td align="right">3.5930845</td>
+</tr>
+<tr class="odd">
+<td align="left">Losses</td>
+<td align="left">Not champion</td>
+<td align="right">0</td>
+<td align="right">1.766537</td>
+<td align="right">5</td>
+<td align="right">1.1039563</td>
+</tr>
+<tr class="even">
+<td align="left">Losses</td>
+<td align="left">Champion</td>
+<td align="right">0</td>
+<td align="right">1.384615</td>
+<td align="right">3</td>
+<td align="right">0.9607689</td>
+</tr>
+<tr class="odd">
+<td align="left">Performance</td>
+<td align="left">Not champion</td>
+<td align="right">1</td>
+<td align="right">252.638132</td>
+<td align="right">515</td>
+<td align="right">146.0959037</td>
+</tr>
+<tr class="even">
+<td align="left">Performance</td>
+<td align="left">Champion</td>
+<td align="right">196</td>
+<td align="right">330.307692</td>
+<td align="right">515</td>
+<td align="right">105.8728676</td>
+</tr>
+<tr class="odd">
+<td align="left">Points</td>
+<td align="left">Not champion</td>
+<td align="right">0</td>
+<td align="right">6.686274</td>
+<td align="right">15</td>
+<td align="right">2.9768807</td>
+</tr>
+<tr class="even">
+<td align="left">Points</td>
+<td align="left">Champion</td>
+<td align="right">6</td>
+<td align="right">8.384615</td>
+<td align="right">13</td>
+<td align="right">2.0631069</td>
+</tr>
+<tr class="odd">
+<td align="left">Position</td>
+<td align="left">Not champion</td>
+<td align="right">1</td>
+<td align="right">11.112841</td>
+<td align="right">24</td>
+<td align="right">6.1083088</td>
+</tr>
+<tr class="even">
+<td align="left">Position</td>
+<td align="left">Champion</td>
+<td align="right">1</td>
+<td align="right">7.230769</td>
+<td align="right">15</td>
+<td align="right">4.3998834</td>
+</tr>
+<tr class="odd">
+<td align="left">Ties</td>
+<td align="left">Not champion</td>
+<td align="right">0</td>
+<td align="right">1.517510</td>
+<td align="right">4</td>
+<td align="right">0.9604914</td>
+</tr>
+<tr class="even">
+<td align="left">Ties</td>
+<td align="left">Champion</td>
+<td align="right">0</td>
+<td align="right">1.230769</td>
+<td align="right">3</td>
+<td align="right">1.0127394</td>
+</tr>
+<tr class="odd">
+<td align="left">Victories</td>
+<td align="left">Not champion</td>
+<td align="right">0</td>
+<td align="right">1.715953</td>
+<td align="right">5</td>
+<td align="right">1.0721339</td>
+</tr>
+<tr class="even">
+<td align="left">Victories</td>
+<td align="left">Champion</td>
+<td align="right">1</td>
+<td align="right">2.384615</td>
+<td align="right">4</td>
+<td align="right">0.7679476</td>
+</tr>
+</tbody>
+</table>
 <p>Here we can see that, at the 5th round, all the champions have woned at least one game, and drawn at the most three games, with the minimum performance (points made / possible points) of 40%.</p>
 </div>
 <div id="th-round-1" class="section level3">
@@ -467,9 +768,149 @@ games %&gt;%
             Mean = mean(value) %&gt;% round(digits = 2),
             Max = max(value),
             SD = sd(value)%&gt;% round(digits = 2))%&gt;%
-  datatable()</code></pre>
-<div id="htmlwidget-3" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"],["Goals conceded","Goals conceded","Goals scored","Goals scored","Losses","Losses","Performance","Performance","Points","Points","Position","Position","Ties","Ties","Victories","Victories"],["Not champion","Champion","Not champion","Champion","Not champion","Champion","Not champion","Champion","Not champion","Champion","Not champion","Champion","Not champion","Champion","Not champion","Champion"],[4,3,3,8,0,0,2,225,1,13,1,1,0,1,0,3],[13.3,10.15,12.95,16.92,3.66,2.23,239,390.54,13.31,18.85,11.27,4.31,2.84,2.23,3.49,5.54],[26,19,23,27,8,5,511,515,25,26,24,11,7,5,8,8],[3.89,5.19,3.95,5.04,1.62,1.42,119.75,97.32,4.32,3.78,6.02,3.35,1.31,1.3,1.51,1.39]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Variable<\/th>\n      <th>Champ<\/th>\n      <th>Min<\/th>\n      <th>Mean<\/th>\n      <th>Max<\/th>\n      <th>SD<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Champ</th>
+<th align="right">Min</th>
+<th align="right">Mean</th>
+<th align="right">Max</th>
+<th align="right">SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Goals conceded</td>
+<td align="left">Not champion</td>
+<td align="right">4</td>
+<td align="right">13.30</td>
+<td align="right">26</td>
+<td align="right">3.89</td>
+</tr>
+<tr class="even">
+<td align="left">Goals conceded</td>
+<td align="left">Champion</td>
+<td align="right">3</td>
+<td align="right">10.15</td>
+<td align="right">19</td>
+<td align="right">5.19</td>
+</tr>
+<tr class="odd">
+<td align="left">Goals scored</td>
+<td align="left">Not champion</td>
+<td align="right">3</td>
+<td align="right">12.95</td>
+<td align="right">23</td>
+<td align="right">3.95</td>
+</tr>
+<tr class="even">
+<td align="left">Goals scored</td>
+<td align="left">Champion</td>
+<td align="right">8</td>
+<td align="right">16.92</td>
+<td align="right">27</td>
+<td align="right">5.04</td>
+</tr>
+<tr class="odd">
+<td align="left">Losses</td>
+<td align="left">Not champion</td>
+<td align="right">0</td>
+<td align="right">3.66</td>
+<td align="right">8</td>
+<td align="right">1.62</td>
+</tr>
+<tr class="even">
+<td align="left">Losses</td>
+<td align="left">Champion</td>
+<td align="right">0</td>
+<td align="right">2.23</td>
+<td align="right">5</td>
+<td align="right">1.42</td>
+</tr>
+<tr class="odd">
+<td align="left">Performance</td>
+<td align="left">Not champion</td>
+<td align="right">2</td>
+<td align="right">239.00</td>
+<td align="right">511</td>
+<td align="right">119.75</td>
+</tr>
+<tr class="even">
+<td align="left">Performance</td>
+<td align="left">Champion</td>
+<td align="right">225</td>
+<td align="right">390.54</td>
+<td align="right">515</td>
+<td align="right">97.32</td>
+</tr>
+<tr class="odd">
+<td align="left">Points</td>
+<td align="left">Not champion</td>
+<td align="right">1</td>
+<td align="right">13.31</td>
+<td align="right">25</td>
+<td align="right">4.32</td>
+</tr>
+<tr class="even">
+<td align="left">Points</td>
+<td align="left">Champion</td>
+<td align="right">13</td>
+<td align="right">18.85</td>
+<td align="right">26</td>
+<td align="right">3.78</td>
+</tr>
+<tr class="odd">
+<td align="left">Position</td>
+<td align="left">Not champion</td>
+<td align="right">1</td>
+<td align="right">11.27</td>
+<td align="right">24</td>
+<td align="right">6.02</td>
+</tr>
+<tr class="even">
+<td align="left">Position</td>
+<td align="left">Champion</td>
+<td align="right">1</td>
+<td align="right">4.31</td>
+<td align="right">11</td>
+<td align="right">3.35</td>
+</tr>
+<tr class="odd">
+<td align="left">Ties</td>
+<td align="left">Not champion</td>
+<td align="right">0</td>
+<td align="right">2.84</td>
+<td align="right">7</td>
+<td align="right">1.31</td>
+</tr>
+<tr class="even">
+<td align="left">Ties</td>
+<td align="left">Champion</td>
+<td align="right">1</td>
+<td align="right">2.23</td>
+<td align="right">5</td>
+<td align="right">1.30</td>
+</tr>
+<tr class="odd">
+<td align="left">Victories</td>
+<td align="left">Not champion</td>
+<td align="right">0</td>
+<td align="right">3.49</td>
+<td align="right">8</td>
+<td align="right">1.51</td>
+</tr>
+<tr class="even">
+<td align="left">Victories</td>
+<td align="left">Champion</td>
+<td align="right">3</td>
+<td align="right">5.54</td>
+<td align="right">8</td>
+<td align="right">1.39</td>
+</tr>
+</tbody>
+</table>
 <p>In the 10th round we can see that the champions scored at least 8 goals, conceded at least 3 goals and lose 5 games at the most. We can see also that all the champions have woned at least 3 games, and drawn between one and five games, with the minimum performance (points made / possible points) of 43.3%.</p>
 </div>
 </div>
@@ -513,9 +954,40 @@ games %&gt;%
             min_prop=min(Proportion) %&gt;% percent(),
             mean_prop = mean(Proportion) %&gt;% percent(),
             max_prop=max(Proportion) %&gt;% percent())%&gt;%
-  datatable()</code></pre>
-<div id="htmlwidget-4" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-4">{"x":{"filter":"none","data":[["1","2"],["Not champion","Champion"],[0,2],[0.89,22.38],[17,38],["0%","5.26%"],["2.27%","56.4%"],["44.7%","86.8%"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Won<\/th>\n      <th>min_n<\/th>\n      <th>mean_n<\/th>\n      <th>max_n<\/th>\n      <th>min_prop<\/th>\n      <th>mean_prop<\/th>\n      <th>max_prop<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Won</th>
+<th align="right">min_n</th>
+<th align="right">mean_n</th>
+<th align="right">max_n</th>
+<th align="left">min_prop</th>
+<th align="left">mean_prop</th>
+<th align="left">max_prop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Not champion</td>
+<td align="right">0</td>
+<td align="right">0.89</td>
+<td align="right">17</td>
+<td align="left">0%</td>
+<td align="left">2.27%</td>
+<td align="left">44.7%</td>
+</tr>
+<tr class="even">
+<td align="left">Champion</td>
+<td align="right">2</td>
+<td align="right">22.38</td>
+<td align="right">38</td>
+<td align="left">5.26%</td>
+<td align="left">56.4%</td>
+<td align="left">86.8%</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>So, we can note that the minimum number of rounds on top is 2 (Flamengo, 2009), while the maximum number is 38 (Cruzeiro, 2003) and the average is about 22 games. Looking on the proportions, we see that the champions often stays on the top a bit more than half of the championship (56,4%).</li>
 </ul>
@@ -576,9 +1048,183 @@ ROC</code></pre>
            Sens = ROC$sensitivities %&gt;% round(digits = 2),
            Speci = ROC$specificities %&gt;% round(digits = 2))%&gt;%
   mutate(Proportion = percent(Proportion))%&gt;%
-  datatable()</code></pre>
-<div id="htmlwidget-5" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33"],["-Inf","1.1%","2.3%","2.5%","3.5%","4.6%","5.0%","5.9%","7.2%","8.3%","9.1%","10.0%","10.7%","12.0%","14.5%","17.1%","18.7%","20.1%","21.4%","24.0%","27.6%","30.3%","35.5%","41.5%","44.1%","51.3%","59.2%","61.2%","66.5%","72.4%","78.1%","84.7%","Inf"],[100,100,100,100,100,100,100,92.31,92.31,92.31,92.31,92.31,92.31,92.31,92.31,84.62,84.62,84.62,84.62,84.62,84.62,84.62,84.62,84.62,76.92,69.23,53.85,46.15,38.46,23.08,15.38,7.69,0],[0,77.04,78.21,79.38,84.44,85.21,85.6,89.49,90.66,92.61,93,93.39,94.16,94.55,94.94,95.72,96.5,96.89,97.28,97.67,98.05,98.44,98.83,99.22,99.22,100,100,100,100,100,100,100,100]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Proportion<\/th>\n      <th>Sens<\/th>\n      <th>Speci<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Proportion</th>
+<th align="right">Sens</th>
+<th align="right">Speci</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">-Inf</td>
+<td align="right">100.00</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">1.1%</td>
+<td align="right">100.00</td>
+<td align="right">77.04</td>
+</tr>
+<tr class="odd">
+<td align="left">2.3%</td>
+<td align="right">100.00</td>
+<td align="right">78.21</td>
+</tr>
+<tr class="even">
+<td align="left">2.5%</td>
+<td align="right">100.00</td>
+<td align="right">79.38</td>
+</tr>
+<tr class="odd">
+<td align="left">3.5%</td>
+<td align="right">100.00</td>
+<td align="right">84.44</td>
+</tr>
+<tr class="even">
+<td align="left">4.6%</td>
+<td align="right">100.00</td>
+<td align="right">85.21</td>
+</tr>
+<tr class="odd">
+<td align="left">5.0%</td>
+<td align="right">100.00</td>
+<td align="right">85.60</td>
+</tr>
+<tr class="even">
+<td align="left">5.9%</td>
+<td align="right">92.31</td>
+<td align="right">89.49</td>
+</tr>
+<tr class="odd">
+<td align="left">7.2%</td>
+<td align="right">92.31</td>
+<td align="right">90.66</td>
+</tr>
+<tr class="even">
+<td align="left">8.3%</td>
+<td align="right">92.31</td>
+<td align="right">92.61</td>
+</tr>
+<tr class="odd">
+<td align="left">9.1%</td>
+<td align="right">92.31</td>
+<td align="right">93.00</td>
+</tr>
+<tr class="even">
+<td align="left">10.0%</td>
+<td align="right">92.31</td>
+<td align="right">93.39</td>
+</tr>
+<tr class="odd">
+<td align="left">10.7%</td>
+<td align="right">92.31</td>
+<td align="right">94.16</td>
+</tr>
+<tr class="even">
+<td align="left">12.0%</td>
+<td align="right">92.31</td>
+<td align="right">94.55</td>
+</tr>
+<tr class="odd">
+<td align="left">14.5%</td>
+<td align="right">92.31</td>
+<td align="right">94.94</td>
+</tr>
+<tr class="even">
+<td align="left">17.1%</td>
+<td align="right">84.62</td>
+<td align="right">95.72</td>
+</tr>
+<tr class="odd">
+<td align="left">18.7%</td>
+<td align="right">84.62</td>
+<td align="right">96.50</td>
+</tr>
+<tr class="even">
+<td align="left">20.1%</td>
+<td align="right">84.62</td>
+<td align="right">96.89</td>
+</tr>
+<tr class="odd">
+<td align="left">21.4%</td>
+<td align="right">84.62</td>
+<td align="right">97.28</td>
+</tr>
+<tr class="even">
+<td align="left">24.0%</td>
+<td align="right">84.62</td>
+<td align="right">97.67</td>
+</tr>
+<tr class="odd">
+<td align="left">27.6%</td>
+<td align="right">84.62</td>
+<td align="right">98.05</td>
+</tr>
+<tr class="even">
+<td align="left">30.3%</td>
+<td align="right">84.62</td>
+<td align="right">98.44</td>
+</tr>
+<tr class="odd">
+<td align="left">35.5%</td>
+<td align="right">84.62</td>
+<td align="right">98.83</td>
+</tr>
+<tr class="even">
+<td align="left">41.5%</td>
+<td align="right">84.62</td>
+<td align="right">99.22</td>
+</tr>
+<tr class="odd">
+<td align="left">44.1%</td>
+<td align="right">76.92</td>
+<td align="right">99.22</td>
+</tr>
+<tr class="even">
+<td align="left">51.3%</td>
+<td align="right">69.23</td>
+<td align="right">100.00</td>
+</tr>
+<tr class="odd">
+<td align="left">59.2%</td>
+<td align="right">53.85</td>
+<td align="right">100.00</td>
+</tr>
+<tr class="even">
+<td align="left">61.2%</td>
+<td align="right">46.15</td>
+<td align="right">100.00</td>
+</tr>
+<tr class="odd">
+<td align="left">66.5%</td>
+<td align="right">38.46</td>
+<td align="right">100.00</td>
+</tr>
+<tr class="even">
+<td align="left">72.4%</td>
+<td align="right">23.08</td>
+<td align="right">100.00</td>
+</tr>
+<tr class="odd">
+<td align="left">78.1%</td>
+<td align="right">15.38</td>
+<td align="right">100.00</td>
+</tr>
+<tr class="even">
+<td align="left">84.7%</td>
+<td align="right">7.69</td>
+<td align="right">100.00</td>
+</tr>
+<tr class="odd">
+<td align="left">Inf</td>
+<td align="right">0.00</td>
+<td align="right">100.00</td>
+</tr>
+</tbody>
+</table>
 <p>Seems like 41,5% is an good cut point because we got 99,22% of specifity (probability of classify the true champion as champion) without losing so much sensibility.</p>
 <p>So let’s take a look on the model results…</p>
 <pre class="r"><code>data_frame(Proportion=seq(0,1,by=.05),
@@ -587,9 +1233,123 @@ ROC</code></pre>
                         type = &quot;response&quot;)
 )%&gt;%
   mutate(prop = percent(prob))%&gt;%
-  datatable()</code></pre>
-<div id="htmlwidget-6" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21"],[0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95,1],[0.00351039205830696,0.00679863638242477,0.0131264614827498,0.0251945027559146,0.0478198912352244,0.0889103369278659,0.159398106511254,0.269253426697675,0.417239947925253,0.581804525671198,0.729972917652378,0.840074808273867,0.910770919727134,0.952000913857118,0.974708834213237,0.986822550696732,0.993174785316686,0.996475838950856,0.998183239872483,0.999064208578722,0.999518191226415],["0.4%","0.7%","1.3%","2.5%","4.8%","8.9%","15.9%","26.9%","41.7%","58.2%","73.0%","84.0%","91.1%","95.2%","97.5%","98.7%","99.3%","99.6%","99.8%","99.9%","100.0%"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Proportion<\/th>\n      <th>prob<\/th>\n      <th>prop<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Proportion</th>
+<th align="right">prob</th>
+<th align="left">prop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.00</td>
+<td align="right">0.0035104</td>
+<td align="left">0.4%</td>
+</tr>
+<tr class="even">
+<td align="right">0.05</td>
+<td align="right">0.0067986</td>
+<td align="left">0.7%</td>
+</tr>
+<tr class="odd">
+<td align="right">0.10</td>
+<td align="right">0.0131265</td>
+<td align="left">1.3%</td>
+</tr>
+<tr class="even">
+<td align="right">0.15</td>
+<td align="right">0.0251945</td>
+<td align="left">2.5%</td>
+</tr>
+<tr class="odd">
+<td align="right">0.20</td>
+<td align="right">0.0478199</td>
+<td align="left">4.8%</td>
+</tr>
+<tr class="even">
+<td align="right">0.25</td>
+<td align="right">0.0889103</td>
+<td align="left">8.9%</td>
+</tr>
+<tr class="odd">
+<td align="right">0.30</td>
+<td align="right">0.1593981</td>
+<td align="left">15.9%</td>
+</tr>
+<tr class="even">
+<td align="right">0.35</td>
+<td align="right">0.2692534</td>
+<td align="left">26.9%</td>
+</tr>
+<tr class="odd">
+<td align="right">0.40</td>
+<td align="right">0.4172399</td>
+<td align="left">41.7%</td>
+</tr>
+<tr class="even">
+<td align="right">0.45</td>
+<td align="right">0.5818045</td>
+<td align="left">58.2%</td>
+</tr>
+<tr class="odd">
+<td align="right">0.50</td>
+<td align="right">0.7299729</td>
+<td align="left">73.0%</td>
+</tr>
+<tr class="even">
+<td align="right">0.55</td>
+<td align="right">0.8400748</td>
+<td align="left">84.0%</td>
+</tr>
+<tr class="odd">
+<td align="right">0.60</td>
+<td align="right">0.9107709</td>
+<td align="left">91.1%</td>
+</tr>
+<tr class="even">
+<td align="right">0.65</td>
+<td align="right">0.9520009</td>
+<td align="left">95.2%</td>
+</tr>
+<tr class="odd">
+<td align="right">0.70</td>
+<td align="right">0.9747088</td>
+<td align="left">97.5%</td>
+</tr>
+<tr class="even">
+<td align="right">0.75</td>
+<td align="right">0.9868226</td>
+<td align="left">98.7%</td>
+</tr>
+<tr class="odd">
+<td align="right">0.80</td>
+<td align="right">0.9931748</td>
+<td align="left">99.3%</td>
+</tr>
+<tr class="even">
+<td align="right">0.85</td>
+<td align="right">0.9964758</td>
+<td align="left">99.6%</td>
+</tr>
+<tr class="odd">
+<td align="right">0.90</td>
+<td align="right">0.9981832</td>
+<td align="left">99.8%</td>
+</tr>
+<tr class="even">
+<td align="right">0.95</td>
+<td align="right">0.9990642</td>
+<td align="left">99.9%</td>
+</tr>
+<tr class="odd">
+<td align="right">1.00</td>
+<td align="right">0.9995182</td>
+<td align="left">100.0%</td>
+</tr>
+</tbody>
+</table>
 <p>Finnaly I can answer to my dad what is the estimated probability of a team be the champion based on how many rounds it was in the first place!</p>
 </div>
 </div>

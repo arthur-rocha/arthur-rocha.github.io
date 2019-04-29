@@ -41,7 +41,6 @@ library(magrittr) #Manipulation
 library(tidyr)    #Manipulation
 library(scales)   #Formatting
 library(ggplot2)  #Plots
-library(DT)       #Tables
 library(pROC)     #ROC curves
 ```
 
@@ -122,7 +121,7 @@ games %<>%  # Tracking the round (game) number
 
 ```{r}
 head(games)%>%
-  datatable()
+  knitr::kable()
 ```
 All seems ok, let's continue...
 
@@ -167,7 +166,7 @@ games %>%
   group_by(Variable,Champ)%>%
   summarise(Min= min(value),Mean = mean(value),Max = max(value),
             SD = sd(value))%>%
-  datatable()
+  knitr::kable()
 ```
 
 
@@ -214,7 +213,7 @@ games %>%
             Mean = mean(value) %>% round(digits = 2),
             Max = max(value),
             SD = sd(value)%>% round(digits = 2))%>%
-  datatable()
+  knitr::kable()
 ```
 
 In the 10th round we can see that the champions scored at least 8 goals, conceded at least 3 goals and lose 5 games at the most. We can see also that all the champions have woned at least 3 games, and drawn between one and five games, with the minimum performance (points made / possible points) of 43.3%.
@@ -266,7 +265,7 @@ first_place_df%>%
             min_prop=min(Proportion) %>% percent(),
             mean_prop = mean(Proportion) %>% percent(),
             max_prop=max(Proportion) %>% percent())%>%
-  datatable()
+  knitr::kable()
 
 ```
 
@@ -306,7 +305,7 @@ data_frame(Proportion = ROC$thresholds,
            Sens = ROC$sensitivities %>% round(digits = 2),
            Speci = ROC$specificities %>% round(digits = 2))%>%
   mutate(Proportion = percent(Proportion))%>%
-  datatable()
+  knitr::kable()
 ```
 
 Seems like 41,5% is an good cut point because we got 99,22% of specifity (probability of classify the true champion as champion) without losing so much sensibility.
@@ -322,7 +321,7 @@ data_frame(Proportion=seq(0,1,by=.05),
                         type = "response")
 )%>%
   mutate(prop = percent(prob))%>%
-  datatable()
+  knitr::kable()
  
 ```
 
