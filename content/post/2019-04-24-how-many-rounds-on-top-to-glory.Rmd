@@ -120,8 +120,7 @@ games %<>%  # Tracking the round (game) number
 - Let's take a look in the data
 
 ```{r}
-head(games)%>%
-  knitr::kable()
+head(games)
 ```
 All seems ok, let's continue...
 
@@ -164,8 +163,10 @@ games %>%
   gather(key="Variable",value="value",-c(Champ))%>%
   filter(value>=0)%>%
   group_by(Variable,Champ)%>%
-  summarise(Min= min(value),Mean = mean(value),Max = max(value),
-            SD = sd(value))%>%
+  summarise(Min= min(value),
+            Mean = mean(value) %>% round(digits = 2),
+            Max = max(value),
+            SD = sd(value) %>% round(digits = 2))%>%
   knitr::kable()
 ```
 
@@ -290,8 +291,7 @@ summary(fit)
 Obviously the proportion of rounds in first is a important variable to explain the win. Let's take a look in the ROC curve. 
 
 ```{r}
-ROC = roc(Won ~ Proportion,data=first_place_df,percent=T)
-ROC
+(ROC = roc(Won ~ Proportion,data=first_place_df,percent=T))
 
 ggroc(ROC)+
   theme_light()
@@ -320,7 +320,7 @@ data_frame(Proportion=seq(0,1,by=.05),
                         newdata = data_frame(Proportion=seq(0,1,by=.05)),
                         type = "response")
 )%>%
-  mutate(prop = percent(prob))%>%
+  mutate(prob = percent(prob))%>%
   knitr::kable()
  
 ```
