@@ -39,7 +39,10 @@ library(XML)      #Package to do web scraping
 library(dplyr)    #Manipulation
 library(magrittr) #Manipulation
 library(tidyr)    #Manipulation
+library(scales)   #Formatting
 library(ggplot2)  #Plots
+library(DT)       #Tables
+library(pROC)     #ROC curves
 ```
 
 
@@ -68,10 +71,10 @@ for (i in 2003:2015) { ## years
 
 If you don't want to scrap the data (because take some time and sometimes don't work so fine) you can get it from here [Data!](https://github.com/arthur-rocha/Brasileirao/raw/master/Brasileirao%202003%20-%202015.csv). 
 
-**Tip:** Be aware with the encoding! 
+**Tip:** Be aware with the encoding! (use "latin-1") 
 
 ```{r, include=F}
-games = readr::read_delim("https://github.com/arthur-rocha/Brasileirao/raw/master/Brasileirao%202003%20-%202015.csv",delim = ";",col_names = T)
+games = read.csv("https://github.com/arthur-rocha/Brasileirao/raw/master/Brasileirao%202003%20-%202015.csv",sep = ";",dec = ",",encoding = "latin-1",check.names = F)
 ```
 
 - Moving on, we need some extra information, like which team was the champion in the season and how many games (rounds) are in each season, because the number of teams has changed in 2005 and changed again in 2006.
@@ -118,7 +121,8 @@ games %<>%  # Tracking the round (game) number
 - Let's take a look in the data
 
 ```{r}
-head(games)
+head(games)%>%
+  datatable()
 ```
 All seems ok, let's continue...
 
@@ -162,11 +166,12 @@ games %>%
   filter(value>=0)%>%
   group_by(Variable,Champ)%>%
   summarise(Min= min(value),Mean = mean(value),Max = max(value),
-            SD = sd(value))
+            SD = sd(value))%>%
+  datatable()
 ```
 
 
-Here we can see that, at the 5th round, all the champions have woned at least one game, and drawn at least one game too.
+Here we can see that, at the 5th round, all the champions have woned at least one game, and drawn at the most three games, with the minimum performance (points made / possible points) of 40%.
 
 
 ### 10th round:
@@ -205,7 +210,120 @@ games %>%
   gather(key="Variable",value="value",-c(Champ))%>%
   filter(value>=0)%>%
   group_by(Variable,Champ)%>%
-  summarise(Min= min(value),Mean = mean(value),Max = max(value),
-            SD = sd(value))
+  summarise(Min= min(value),
+            Mean = mean(value) %>% round(digits = 2),
+            Max = max(value),
+            SD = sd(value)%>% round(digits = 2))%>%
+  datatable()
 ```
 
+In the 10th round we can see that the champions scored at least 8 goals, conceded at least 3 goals and lose 5 games at the most. We can see also that all the champions have woned at least 3 games, and drawn between one and five games, with the minimum performance (points made / possible points) of 43.3%.
+
+
+## How many rounds on top make a champion?
+
+So, to answer my dad's question about the football champions I thought that discovery the numbers of rounds in the first place would be of great value.
+
+- Thus now we need to count the number of rounds in first place of each team in each season (year).
+
+```{r}
+games %>%
+  group_by(Year,Team)%>%
+  #Counting the number of rounds on top
+  summarise(Rounds_on_top = sum(First_place))%>%
+  inner_join(champ_dt)%>%
+  #Was this team the champion of the season?
+  mutate(Won = (Team==Champion),
+         Won = as.numeric(Won),
+         N_round = case_when(Year < 2005 ~ 46,
+                             Year == 2005 ~ 42,
+                             Year > 2005 ~38)) -> first_place_df
+```
+
+- We can now calcule the proportions of rounds needed.
+
+```{r}
+
+first_place_df%>%
+  mutate(Proportion = Rounds_on_top/N_round,
+         Won = factor(Won,labels = c("Not champion",
+                                 "Champion")))%>%
+  ggplot(aes(Proportion))+
+  geom_histogram(bins = 5,col=1,alpha=.5)+
+  facet_wrap(~Won,scales = "free_y")+
+  theme_light()
+```
+
+```{r}
+first_place_df%>%
+  mutate(Proportion = Rounds_on_top/N_round,
+         Won = factor(Won,labels = c("Not champion",
+                                 "Champion")))%>%
+  group_by(Won)%>%
+  summarise(min_n=min(Rounds_on_top) %>% round(digits = 2),
+            mean_n = mean(Rounds_on_top) %>% round(digits = 2),
+            max_n=max(Rounds_on_top) %>% round(digits = 2),
+            min_prop=min(Proportion) %>% percent(),
+            mean_prop = mean(Proportion) %>% percent(),
+            max_prop=max(Proportion) %>% percent())%>%
+  datatable()
+
+```
+
+- So, we can note that the minimum number of rounds on top is 2 (Flamengo,  2009), while the maximum number is 38 (Cruzeiro, 2003) and the average is about 22 games. Looking on the proportions, we see that the champions often stays on the top a bit more than half of the championship (56,4%).
+
+### Estimating the number of rounds
+
+- To estimate the number of rounds, we can consider a logist regression with "champion" (binary) as the response variable and the proportion of rounds on first as the predictor variable.
+
+```{r}
+first_place_df%<>%
+  mutate(Proportion = Rounds_on_top/N_round)
+
+#fitting the model
+
+fit=glm(Won ~ Proportion,
+        family = binomial(link = "logit"),
+        data=first_place_df)
+
+summary(fit)
+```
+Obviously the proportion of rounds in first is a important variable to explain the win. Let's take a look in the ROC curve. 
+
+```{r}
+ROC = roc(Won ~ Proportion,data=first_place_df,percent=T)
+ROC
+
+ggroc(ROC)+
+  theme_light()
+
+```
+
+- We got 98.59% of Area under the curve (which is excellent). Now we can look on the true positive ratio and true negative ratio to decide a cut point.
+
+```{r}
+data_frame(Proportion = ROC$thresholds,
+           Sens = ROC$sensitivities %>% round(digits = 2),
+           Speci = ROC$specificities %>% round(digits = 2))%>%
+  mutate(Proportion = percent(Proportion))%>%
+  datatable()
+```
+
+Seems like 41,5% is an good cut point because we got 99,22% of specifity (probability of classify the true champion as champion) without losing so much sensibility.
+
+
+So let's take a look on the model results...
+
+
+```{r}
+data_frame(Proportion=seq(0,1,by=.05),
+           prob=predict(fit,
+                        newdata = data_frame(Proportion=seq(0,1,by=.05)),
+                        type = "response")
+)%>%
+  mutate(prop = percent(prob))%>%
+  datatable()
+ 
+```
+
+Finnaly I can answer to my dad what is the estimated probability of a team be the champion based on how many rounds it was in the first place!
