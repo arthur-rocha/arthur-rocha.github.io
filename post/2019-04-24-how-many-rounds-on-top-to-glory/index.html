@@ -605,8 +605,10 @@ games %&gt;%
   ylab(&quot;Frequency (%)&quot;)+
   scale_y_continuous(labels = scales::percent)+
   scale_x_continuous(breaks = seq(0,30,by=4))</code></pre>
-<p><img src="/post/2019-04-24-how-many-rounds-on-top-to-glory_files/figure-html/unnamed-chunk-9-1.png" width="672" />
-- Note that are negative points again, this happened because of the same reason.</p>
+<p><img src="/post/2019-04-24-how-many-rounds-on-top-to-glory_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<ul>
+<li>Note that are negative points again, this happened because of the same reason.</li>
+</ul>
 <pre class="r"><code># Making a table
 games %&gt;%
   filter(Round == 10)%&gt;%
