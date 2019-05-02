@@ -29,7 +29,7 @@ So, a few days ago my father gave me a challenge, he challenged me to understand
 <ul>
 <li>Firstly we need to get the data!!</li>
 </ul>
-<p>I haven’t found a well structured data base to work with, so I had to work with the information provided by this site <a href="http://futpedia.globo.com/campeonato/campeonato-brasileiro/">http://futpedia.globo.com/campeonato/campeonato-brasileiro/</a> and
+<p>I haven’t found a well structured data base to work with, so I had to work with the information provided by this <a href="http://futpedia.globo.com/campeonato/campeonato-brasileiro/">site</a> and
 I had to do a function to scrap the data.</p>
 <ul>
 <li>Packages used</li>
@@ -45,7 +45,8 @@ library(pROC)     #ROC curves</code></pre>
 <li>That is the function to do the web scraping. Note that the site has information only until 2015.</li>
 </ul>
 <pre class="r"><code># URL base to all years
-url1=&quot;http://futpedia.globo.com/campeonato/campeonato-brasileiro/&quot;
+url1=&quot;futpedia.globo.com/campeonato
+/campeonato-brasileiro/&quot;
 
 #Empty data frame to store the information
 games= data_frame()
@@ -61,7 +62,7 @@ for (i in 2003:2015) { ## years
     mutate(Year = i)%&gt;%
     bind_rows(games) -&gt; games
 }</code></pre>
-<p>If you don’t want to scrap the data (because take some time and sometimes don’t work so fine) you can get it from here <a href="https://github.com/arthur-rocha/Brasileirao/raw/master/Brasileirao%202003%20-%202015.csv">Data!</a>.</p>
+<p>If you don’t want to scrap the data (because it can take some time and sometimes doesn’t work so fine) you can get it from here <a href="https://github.com/arthur-rocha/Brasileirao/raw/master/Brasileirao%202003%20-%202015.csv">Data!</a>.</p>
 <p><strong>Tip:</strong> Be aware with the encoding! (use “latin-1”)</p>
 <ul>
 <li>Moving on, we need some extra information, like which team was the champion in the season and how many games (rounds) are in each season, because the number of teams has changed in 2005 and changed again in 2006.</li>
@@ -107,12 +108,12 @@ champ_dt = data_frame(Year = 2003:2018,
 ## 5        5  Corinthians      3     1         1    0      0            1
 ## 6        6   Fluminense      3     1         1    0      0            1
 ##   Goals conceded Goal difference Performance Year Round    Champion Champ
-## 1              1               3       100.0 2015     1 Corinthians     0
-## 2              0               3       100.0 2015     1 Corinthians     0
-## 3              1               1       100.0 2015     1 Corinthians     0
-## 4              1               1       100.0 2015     1 Corinthians     0
-## 5              0               1       100.0 2015     1 Corinthians     1
-## 6              0               1       100.0 2015     1 Corinthians     0
+## 1              1               3         100 2015     1 Corinthians     0
+## 2              0               3         100 2015     1 Corinthians     0
+## 3              1               1         100 2015     1 Corinthians     0
+## 4              1               1         100 2015     1 Corinthians     0
+## 5              0               1         100 2015     1 Corinthians     1
+## 6              0               1         100 2015     1 Corinthians     0
 ##   N_round First_place TP TN
 ## 1      38           1  0  0
 ## 2      38           0  0  0
@@ -146,6 +147,9 @@ games %&gt;%
   ylab(&quot;Frequency (%)&quot;)+
   scale_y_continuous(labels = scales::percent)</code></pre>
 <p><img src="/post/2019-04-24-how-many-rounds-on-top-to-glory_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<ul>
+<li>Note that are negative points, this happened because of punishments gave by CBF for some teams.</li>
+</ul>
 <pre class="r"><code># Making a table
 games %&gt;%
   filter(Round == 5)%&gt;%
@@ -155,7 +159,6 @@ games %&gt;%
   mutate_all(.funs = as.numeric)%&gt;%
   mutate(Champ = factor(Champ, labels= c(&quot;Not champion&quot;,&quot;Champion&quot;)))%&gt;%
   gather(key=&quot;Variable&quot;,value=&quot;value&quot;,-c(Champ))%&gt;%
-  filter(value&gt;=0)%&gt;%
   group_by(Variable,Champ)%&gt;%
   summarise(Min= min(value),
             Mean = mean(value) %&gt;% round(digits = 2),
@@ -179,7 +182,7 @@ games %&gt;%
 <td align="left">Not champion</td>
 <td align="right">1</td>
 <td align="right">6.59</td>
-<td align="right">17</td>
+<td align="right">17.0</td>
 <td align="right">2.95</td>
 </tr>
 <tr class="even">
@@ -187,7 +190,7 @@ games %&gt;%
 <td align="left">Champion</td>
 <td align="right">2</td>
 <td align="right">6.00</td>
-<td align="right">12</td>
+<td align="right">12.0</td>
 <td align="right">2.83</td>
 </tr>
 <tr class="odd">
@@ -195,7 +198,7 @@ games %&gt;%
 <td align="left">Not champion</td>
 <td align="right">1</td>
 <td align="right">6.49</td>
-<td align="right">16</td>
+<td align="right">16.0</td>
 <td align="right">2.71</td>
 </tr>
 <tr class="even">
@@ -203,7 +206,7 @@ games %&gt;%
 <td align="left">Champion</td>
 <td align="right">3</td>
 <td align="right">7.92</td>
-<td align="right">17</td>
+<td align="right">17.0</td>
 <td align="right">3.59</td>
 </tr>
 <tr class="odd">
@@ -211,7 +214,7 @@ games %&gt;%
 <td align="left">Not champion</td>
 <td align="right">0</td>
 <td align="right">1.77</td>
-<td align="right">5</td>
+<td align="right">5.0</td>
 <td align="right">1.10</td>
 </tr>
 <tr class="even">
@@ -219,39 +222,39 @@ games %&gt;%
 <td align="left">Champion</td>
 <td align="right">0</td>
 <td align="right">1.38</td>
-<td align="right">3</td>
+<td align="right">3.0</td>
 <td align="right">0.96</td>
 </tr>
 <tr class="odd">
 <td align="left">Performance</td>
 <td align="left">Not champion</td>
-<td align="right">1</td>
-<td align="right">252.64</td>
-<td align="right">515</td>
-<td align="right">146.10</td>
+<td align="right">0</td>
+<td align="right">44.44</td>
+<td align="right">100.0</td>
+<td align="right">19.67</td>
 </tr>
 <tr class="even">
 <td align="left">Performance</td>
 <td align="left">Champion</td>
-<td align="right">196</td>
-<td align="right">330.31</td>
-<td align="right">515</td>
-<td align="right">105.87</td>
+<td align="right">40</td>
+<td align="right">55.91</td>
+<td align="right">86.7</td>
+<td align="right">13.75</td>
 </tr>
 <tr class="odd">
 <td align="left">Points</td>
 <td align="left">Not champion</td>
-<td align="right">0</td>
-<td align="right">6.69</td>
-<td align="right">15</td>
-<td align="right">2.98</td>
+<td align="right">-13</td>
+<td align="right">6.57</td>
+<td align="right">15.0</td>
+<td align="right">3.26</td>
 </tr>
 <tr class="even">
 <td align="left">Points</td>
 <td align="left">Champion</td>
 <td align="right">6</td>
 <td align="right">8.38</td>
-<td align="right">13</td>
+<td align="right">13.0</td>
 <td align="right">2.06</td>
 </tr>
 <tr class="odd">
@@ -259,7 +262,7 @@ games %&gt;%
 <td align="left">Not champion</td>
 <td align="right">1</td>
 <td align="right">11.11</td>
-<td align="right">24</td>
+<td align="right">24.0</td>
 <td align="right">6.11</td>
 </tr>
 <tr class="even">
@@ -267,7 +270,7 @@ games %&gt;%
 <td align="left">Champion</td>
 <td align="right">1</td>
 <td align="right">7.23</td>
-<td align="right">15</td>
+<td align="right">15.0</td>
 <td align="right">4.40</td>
 </tr>
 <tr class="odd">
@@ -275,7 +278,7 @@ games %&gt;%
 <td align="left">Not champion</td>
 <td align="right">0</td>
 <td align="right">1.52</td>
-<td align="right">4</td>
+<td align="right">4.0</td>
 <td align="right">0.96</td>
 </tr>
 <tr class="even">
@@ -283,7 +286,7 @@ games %&gt;%
 <td align="left">Champion</td>
 <td align="right">0</td>
 <td align="right">1.23</td>
-<td align="right">3</td>
+<td align="right">3.0</td>
 <td align="right">1.01</td>
 </tr>
 <tr class="odd">
@@ -291,7 +294,7 @@ games %&gt;%
 <td align="left">Not champion</td>
 <td align="right">0</td>
 <td align="right">1.72</td>
-<td align="right">5</td>
+<td align="right">5.0</td>
 <td align="right">1.07</td>
 </tr>
 <tr class="even">
@@ -299,12 +302,13 @@ games %&gt;%
 <td align="left">Champion</td>
 <td align="right">1</td>
 <td align="right">2.38</td>
-<td align="right">4</td>
+<td align="right">4.0</td>
 <td align="right">0.77</td>
 </tr>
 </tbody>
 </table>
-<p>Here we can see that, at the 5th round, all the champions have woned at least one game, and drawn at the most three games, with the minimum performance (points made / possible points) of 40%.</p>
+<p>Here we can see that, at the 5th round, all the champions have woned at least one game, and drawn three games at the most, with the minimum performance (points made / possible points) of 40%, but none of the champions had a performance score of 100% at the 5th round.</p>
+<p>The minimum number of goals scored by the champions was 3 and the maximum number of goals conceded was 12.</p>
 </div>
 <div id="th-round-1" class="section level3">
 <h3>10th round:</h3>
@@ -327,7 +331,8 @@ games %&gt;%
   ylab(&quot;Frequency (%)&quot;)+
   scale_y_continuous(labels = scales::percent)+
   scale_x_continuous(breaks = seq(0,30,by=4))</code></pre>
-<p><img src="/post/2019-04-24-how-many-rounds-on-top-to-glory_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/post/2019-04-24-how-many-rounds-on-top-to-glory_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+- Note that are negative points again, this happened because of the same reason.</p>
 <pre class="r"><code># Making a table
 games %&gt;%
   filter(Round == 10)%&gt;%
@@ -337,7 +342,6 @@ games %&gt;%
   mutate_all(.funs = as.numeric)%&gt;%
   mutate(Champ = factor(Champ, labels= c(&quot;Not champion&quot;,&quot;Champion&quot;)))%&gt;%
   gather(key=&quot;Variable&quot;,value=&quot;value&quot;,-c(Champ))%&gt;%
-  filter(value&gt;=0)%&gt;%
   group_by(Variable,Champ)%&gt;%
   summarise(Min= min(value),
             Mean = mean(value) %&gt;% round(digits = 2),
@@ -359,129 +363,129 @@ games %&gt;%
 <tr class="odd">
 <td align="left">Goals conceded</td>
 <td align="left">Not champion</td>
-<td align="right">4</td>
+<td align="right">4.0</td>
 <td align="right">13.30</td>
-<td align="right">26</td>
+<td align="right">26.0</td>
 <td align="right">3.89</td>
 </tr>
 <tr class="even">
 <td align="left">Goals conceded</td>
 <td align="left">Champion</td>
-<td align="right">3</td>
+<td align="right">3.0</td>
 <td align="right">10.15</td>
-<td align="right">19</td>
+<td align="right">19.0</td>
 <td align="right">5.19</td>
 </tr>
 <tr class="odd">
 <td align="left">Goals scored</td>
 <td align="left">Not champion</td>
-<td align="right">3</td>
+<td align="right">3.0</td>
 <td align="right">12.95</td>
-<td align="right">23</td>
+<td align="right">23.0</td>
 <td align="right">3.95</td>
 </tr>
 <tr class="even">
 <td align="left">Goals scored</td>
 <td align="left">Champion</td>
-<td align="right">8</td>
+<td align="right">8.0</td>
 <td align="right">16.92</td>
-<td align="right">27</td>
+<td align="right">27.0</td>
 <td align="right">5.04</td>
 </tr>
 <tr class="odd">
 <td align="left">Losses</td>
 <td align="left">Not champion</td>
-<td align="right">0</td>
+<td align="right">0.0</td>
 <td align="right">3.66</td>
-<td align="right">8</td>
+<td align="right">8.0</td>
 <td align="right">1.62</td>
 </tr>
 <tr class="even">
 <td align="left">Losses</td>
 <td align="left">Champion</td>
-<td align="right">0</td>
+<td align="right">0.0</td>
 <td align="right">2.23</td>
-<td align="right">5</td>
+<td align="right">5.0</td>
 <td align="right">1.42</td>
 </tr>
 <tr class="odd">
 <td align="left">Performance</td>
 <td align="left">Not champion</td>
-<td align="right">2</td>
-<td align="right">239.00</td>
-<td align="right">511</td>
-<td align="right">119.75</td>
+<td align="right">6.7</td>
+<td align="right">44.42</td>
+<td align="right">83.3</td>
+<td align="right">14.16</td>
 </tr>
 <tr class="even">
 <td align="left">Performance</td>
 <td align="left">Champion</td>
-<td align="right">225</td>
-<td align="right">390.54</td>
-<td align="right">515</td>
-<td align="right">97.32</td>
+<td align="right">43.3</td>
+<td align="right">62.82</td>
+<td align="right">86.7</td>
+<td align="right">12.61</td>
 </tr>
 <tr class="odd">
 <td align="left">Points</td>
 <td align="left">Not champion</td>
-<td align="right">1</td>
-<td align="right">13.31</td>
-<td align="right">25</td>
-<td align="right">4.32</td>
+<td align="right">-6.0</td>
+<td align="right">13.23</td>
+<td align="right">25.0</td>
+<td align="right">4.48</td>
 </tr>
 <tr class="even">
 <td align="left">Points</td>
 <td align="left">Champion</td>
-<td align="right">13</td>
+<td align="right">13.0</td>
 <td align="right">18.85</td>
-<td align="right">26</td>
+<td align="right">26.0</td>
 <td align="right">3.78</td>
 </tr>
 <tr class="odd">
 <td align="left">Position</td>
 <td align="left">Not champion</td>
-<td align="right">1</td>
+<td align="right">1.0</td>
 <td align="right">11.27</td>
-<td align="right">24</td>
+<td align="right">24.0</td>
 <td align="right">6.02</td>
 </tr>
 <tr class="even">
 <td align="left">Position</td>
 <td align="left">Champion</td>
-<td align="right">1</td>
+<td align="right">1.0</td>
 <td align="right">4.31</td>
-<td align="right">11</td>
+<td align="right">11.0</td>
 <td align="right">3.35</td>
 </tr>
 <tr class="odd">
 <td align="left">Ties</td>
 <td align="left">Not champion</td>
-<td align="right">0</td>
+<td align="right">0.0</td>
 <td align="right">2.84</td>
-<td align="right">7</td>
+<td align="right">7.0</td>
 <td align="right">1.31</td>
 </tr>
 <tr class="even">
 <td align="left">Ties</td>
 <td align="left">Champion</td>
-<td align="right">1</td>
+<td align="right">1.0</td>
 <td align="right">2.23</td>
-<td align="right">5</td>
+<td align="right">5.0</td>
 <td align="right">1.30</td>
 </tr>
 <tr class="odd">
 <td align="left">Victories</td>
 <td align="left">Not champion</td>
-<td align="right">0</td>
+<td align="right">0.0</td>
 <td align="right">3.49</td>
-<td align="right">8</td>
+<td align="right">8.0</td>
 <td align="right">1.51</td>
 </tr>
 <tr class="even">
 <td align="left">Victories</td>
 <td align="left">Champion</td>
-<td align="right">3</td>
+<td align="right">3.0</td>
 <td align="right">5.54</td>
-<td align="right">8</td>
+<td align="right">8.0</td>
 <td align="right">1.39</td>
 </tr>
 </tbody>
@@ -564,7 +568,7 @@ games %&gt;%
 </tbody>
 </table>
 <ul>
-<li>So, we can note that the minimum number of rounds on top is 2 (Flamengo, 2009), while the maximum number is 38 (Cruzeiro, 2003) and the average is about 22 games. Looking on the proportions, we see that the champions often stays on the top a bit more than half of the championship (56,4%).</li>
+<li>So, we can note that the minimum number of rounds on top was 2 (Flamengo, 2009), while the maximum number was 38 (Cruzeiro, 2003) and the average was about 22 games. Looking on the proportions, we can see that the champions often stays on the top a bit more than half of the championship (56,4%).</li>
 </ul>
 <div id="estimating-the-number-of-rounds" class="section level3">
 <h3>Estimating the number of rounds</h3>

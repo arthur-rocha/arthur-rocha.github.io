@@ -29,7 +29,7 @@ Thus I've accepted the challenge and here are the results:
 
 - Firstly we need to get the data!! 
 
-I haven't found a well structured data base to work with, so I had to work with the information provided by this site [http://futpedia.globo.com/campeonato/campeonato-brasileiro/](http://futpedia.globo.com/campeonato/campeonato-brasileiro/) and
+I haven't found a well structured data base to work with, so I had to work with the information provided by this [site](http://futpedia.globo.com/campeonato/campeonato-brasileiro/) and
 I had to do a function to scrap the data.
 
 - Packages used
@@ -49,7 +49,8 @@ library(pROC)     #ROC curves
 
 ```{r, eval = FALSE, include=TRUE}
 # URL base to all years
-url1="http://futpedia.globo.com/campeonato/campeonato-brasileiro/"
+url1="futpedia.globo.com/campeonato
+/campeonato-brasileiro/"
 
 #Empty data frame to store the information
 games= data_frame()
@@ -68,12 +69,12 @@ for (i in 2003:2015) { ## years
 
 ```
 
-If you don't want to scrap the data (because take some time and sometimes don't work so fine) you can get it from here [Data!](https://github.com/arthur-rocha/Brasileirao/raw/master/Brasileirao%202003%20-%202015.csv). 
+If you don't want to scrap the data (because it can take some time and sometimes doesn't work so fine) you can get it from here [Data!](https://github.com/arthur-rocha/Brasileirao/raw/master/Brasileirao%202003%20-%202015.csv). 
 
 **Tip:** Be aware with the encoding! (use "latin-1") 
 
 ```{r, include=F}
-games = read.csv("https://github.com/arthur-rocha/Brasileirao/raw/master/Brasileirao%202003%20-%202015.csv",sep = ";",dec = ",",encoding = "latin-1",check.names = F)
+games = read.csv("https://github.com/arthur-rocha/Brasileirao/raw/master/Brasileirao%202003%20-%202015.csv",sep = ";",dec = ".",encoding = "latin-1",check.names = F)
 ```
 
 - Moving on, we need some extra information, like which team was the champion in the season and how many games (rounds) are in each season, because the number of teams has changed in 2005 and changed again in 2006.
@@ -151,6 +152,8 @@ games %>%
   scale_y_continuous(labels = scales::percent)
 ```
 
+- Note that are negative points, this happened because of punishments gave by CBF for some teams.  
+
 ```{r}
 # Making a table
 games %>%
@@ -161,7 +164,6 @@ games %>%
   mutate_all(.funs = as.numeric)%>%
   mutate(Champ = factor(Champ, labels= c("Not champion","Champion")))%>%
   gather(key="Variable",value="value",-c(Champ))%>%
-  filter(value>=0)%>%
   group_by(Variable,Champ)%>%
   summarise(Min= min(value),
             Mean = mean(value) %>% round(digits = 2),
@@ -171,7 +173,9 @@ games %>%
 ```
 
 
-Here we can see that, at the 5th round, all the champions have woned at least one game, and drawn at the most three games, with the minimum performance (points made / possible points) of 40%.
+Here we can see that, at the 5th round, all the champions have woned at least one game, and drawn three games at the most, with the minimum performance (points made / possible points) of 40%, but none of the champions had a performance score of 100% at the 5th round.
+
+The minimum number of goals scored by the champions was 3 and the maximum number of goals conceded was 12.
 
 
 ### 10th round:
@@ -197,6 +201,7 @@ games %>%
   scale_y_continuous(labels = scales::percent)+
   scale_x_continuous(breaks = seq(0,30,by=4))
 ```
+- Note that are negative points again, this happened because of the same reason. 
 
 ```{r}
 # Making a table
@@ -208,7 +213,6 @@ games %>%
   mutate_all(.funs = as.numeric)%>%
   mutate(Champ = factor(Champ, labels= c("Not champion","Champion")))%>%
   gather(key="Variable",value="value",-c(Champ))%>%
-  filter(value>=0)%>%
   group_by(Variable,Champ)%>%
   summarise(Min= min(value),
             Mean = mean(value) %>% round(digits = 2),
@@ -270,7 +274,7 @@ first_place_df%>%
 
 ```
 
-- So, we can note that the minimum number of rounds on top is 2 (Flamengo,  2009), while the maximum number is 38 (Cruzeiro, 2003) and the average is about 22 games. Looking on the proportions, we see that the champions often stays on the top a bit more than half of the championship (56,4%).
+- So, we can note that the minimum number of rounds on top was 2 (Flamengo,  2009), while the maximum number was 38 (Cruzeiro, 2003) and the average was about 22 games. Looking on the proportions, we can see that the champions often stays on the top a bit more than half of the championship (56,4%).
 
 ### Estimating the number of rounds
 
