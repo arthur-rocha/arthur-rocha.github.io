@@ -6,10 +6,26 @@
     <description>Recent content on Arthur Rocha</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Wed, 24 Apr 2019 12:03:06 -0300</lastBuildDate>
+    <lastBuildDate>Fri, 24 May 2019 12:03:06 -0300</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Solving the Birthday Paradox</title>
+      <link>/post/2019-05-24-solving-the-birthday-paradox/</link>
+      <pubDate>Fri, 24 May 2019 12:03:06 -0300</pubDate>
+      
+      <guid>/post/2019-05-24-solving-the-birthday-paradox/</guid>
+      <description>IntroductionIf you ever had a probability course, it’s probably that you had to solve the birthday paradox (also called as the birthday problem) or had heard of it at least.
+The birthday paradox consists of measuring the probability of at least 2 persons in a room, with n &amp;lt; 365 persons, were born on the same day (\(p(n)\)).To calculate this is necessary to make the assumptions that are 365 possibilities of days and each day has the same probability of being a birthday.Thinking on the complementary probability \(p^c(n)\)(probability of none of the persons had born on the same day), after some inspiration you get:
+\(p^c(n) = 1 \times (1 - \frac{1}{365}) \times (1 - \frac{2}{365}) \times ... \times (1 - \frac{n-1}{365}) = \frac{365!}{365^n(365-n)!}\)
+With more inspiration and some free time you can see that it can be approximated, by a Taylor expansion to:
+\(p^c(n) \approx e^{-(n(n-1)) / 2 \times 365}\)
+And then:
+\(p(n) = 1 - p^c(n) \approx 1 - e^{-(n(n-1)) / 2 \times 365}\)
+But … What if you don’t want to do all the math by hand? Well, you can always (not always, but you get the point) simulate!So let’s do that in R!</description>
+    </item>
     
     <item>
       <title>How many rounds on top are necessary to be a soccer champion?</title>

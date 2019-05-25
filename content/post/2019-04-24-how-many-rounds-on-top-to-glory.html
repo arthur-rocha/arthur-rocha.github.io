@@ -139,9 +139,14 @@ games %&gt;%
   mutate_all(.funs = as.numeric)%&gt;%
   mutate(Champ = factor(Champ, labels= c(&quot;Not champion&quot;,&quot;Champion&quot;)))%&gt;%
   gather(key=&quot;Variable&quot;,value=&quot;value&quot;,-c(Champ))%&gt;%
-  ggplot(aes(value,fill=Champ))+
-  geom_histogram(aes(y=..density..),binwidth = 1,col=1,alpha=.3)+
-  facet_wrap( ~Variable,scales = &quot;free&quot;)+
+  group_by(Champ,Variable)%&gt;%
+  mutate(tot = n())%&gt;%
+  group_by(Champ,Variable,value)%&gt;%
+  summarise(freq = n(), tot=mean(tot))%&gt;%
+  mutate(perc = freq/tot)%&gt;%
+  ggplot(aes(value,perc,fill=Champ))+
+  geom_col(width = 1,col=1,alpha=.3)+
+  facet_wrap(~Variable,scales = &quot;free&quot;)+
   theme_light()+
   scale_fill_discrete(&quot;&quot;)+
   ylab(&quot;Frequency (%)&quot;)+

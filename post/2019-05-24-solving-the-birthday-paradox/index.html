@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="zn-Hans">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
+  <meta name="author" content="Arthur Rocha">
+  <meta name="description" content="IntroductionIf you ever had a probability course, it’s probably that you had to solve the birthday paradox (also called as the birthday problem) or had heard of it at least.
+The birthday paradox consists of measuring the probability of at least 2 persons in a room, with n &lt; 365 persons, were born on the same day (\(p(n)\)).To calculate this is necessary to make the assumptions that are 365 possibilities of days and each day has the same probability of being a birthday.Thinking on the complementary probability \(p^c(n)\)(probability of none of the persons had born on the same day), after some inspiration you get:
+\(p^c(n) = 1 \times (1 - \frac{1}{365}) \times (1 - \frac{2}{365}) \times ... \times (1 - \frac{n-1}{365}) = \frac{365!}{365^n(365-n)!}\)
+With more inspiration and some free time you can see that it can be approximated, by a Taylor expansion to:
+\(p^c(n) \approx e^{-(n(n-1)) / 2 \times 365}\)
+And then:
+\(p(n) = 1 - p^c(n) \approx 1 - e^{-(n(n-1)) / 2 \times 365}\)
+But … What if you don’t want to do all the math by hand? Well, you can always (not always, but you get the point) simulate!So let’s do that in R!">
+  
+  <meta property="og:title" content="Solving the Birthday Paradox" />
+<meta property="og:description" content="IntroductionIf you ever had a probability course, it’s probably that you had to solve the birthday paradox (also called as the birthday problem) or had heard of it at least.
+The birthday paradox consists of measuring the probability of at least 2 persons in a room, with n &lt; 365 persons, were born on the same day (\(p(n)\)).To calculate this is necessary to make the assumptions that are 365 possibilities of days and each day has the same probability of being a birthday.Thinking on the complementary probability \(p^c(n)\)(probability of none of the persons had born on the same day), after some inspiration you get:
+\(p^c(n) = 1 \times (1 - \frac{1}{365}) \times (1 - \frac{2}{365}) \times ... \times (1 - \frac{n-1}{365}) = \frac{365!}{365^n(365-n)!}\)
+With more inspiration and some free time you can see that it can be approximated, by a Taylor expansion to:
+\(p^c(n) \approx e^{-(n(n-1)) / 2 \times 365}\)
+And then:
+\(p(n) = 1 - p^c(n) \approx 1 - e^{-(n(n-1)) / 2 \times 365}\)
+But … What if you don’t want to do all the math by hand? Well, you can always (not always, but you get the point) simulate!So let’s do that in R!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/2019-05-24-solving-the-birthday-paradox/" />
+<meta property="article:published_time" content="2019-05-24T12:03:06-03:00"/>
+<meta property="article:modified_time" content="2019-05-24T12:03:06-03:00"/>
+
+
+  <title>
+  
+       Solving the Birthday Paradox | Arthur Rocha 
+  
+  </title>
+
+  <link rel="canonical" href="/post/2019-05-24-solving-the-birthday-paradox/">
+
+  
+  
+
+  
+  <link href="/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="/css/font.css" rel="stylesheet"> 
+    
+  
+  <link href="/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
+  <link href="/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="/css/main.css" rel="stylesheet">
+
+
+  
+  <link rel="shortcut icon"
+  
+      href="/img/Alpha.jpg"
+  
+  >
+
+
+  
+  
+
+  <style type="text/css">
+      @media (min-width: 800px) and (max-width: 850px) {
+              .navbar:not(.top-nav-collapse) {
+                  background: #1C2331!important;
+              }
+          }
+  </style>
+
+
+  
+    
+    <link rel="stylesheet" href="/js/vendors/katex/katex.min.css">
+  
+  
+
+  
+    
+    <link rel="stylesheet" href="/css/vendors/highlight/github-gist.css">
+  
+
+</head>
+
+  <body class="bg-light" data-spy="scroll" data-target="#page-scrollspy" data-offset="90">
+  
+    
+    
+
+    
+      
+
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
+
+      
+      <a class="navbar-brand" href="/">
+          
+        <img class="avatar" src="/" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
+        
+        <strong> Arthur Rocha</strong>
+      </a>
+
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        
+        <ul class="navbar-nav mr-auto ">
+          <li class="nav-item ">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="/post" >Blog  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="/about" >About  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="/projects" >Projects  </a>
+            </li>
+          
+          
+        </ul>
+
+      </div>
+
+    </div>
+  </nav>
+  
+ 
+      
+ 
+
+
+
+
+
+
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;" >  
+
+  
+  
+  
+
+  
+  <div class="carousel-inner" role="listbox">
+    
+      
+
+        
+        <div class="carousel-item active">
+          <div class="view" style="background-image: url('/img/header-slides/nasa-53884-unsplash.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+            
+            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+              
+              
+              
+
+            </div>
+            
+
+          </div>
+        </div>
+        
+      
+    
+
+  
+  </div>
+  
+
+  
+  <div class="carousel-content text-center white-text wow fadeIn">
+    <div class="row mx-0 headfont mt-3 pt-4">
+      
+      <div class="col-12 col-sm-5 align-middle">
+        <a href="/">
+          
+            <img class="pull-right avatar avatar-md" src="/img/Alpha.jpg" alt="" >
+          
+        </a>
+      </div>
+      
+      <div class="col-12 col-sm-7 text-left pl-2">
+        <a href="/">
+          <h1 class="mb-2 h1" style="font-weight: 300;" >
+            <strong>Arthur Rocha</strong>
+          </h1>
+        </a>
+        
+
+             
+        <div class="mt-2" style="font-size: 1rem; color: white;">
+            
+              <a href="//github.com/arthur-rocha" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
+            
+            
+              <a href="//linkedin.com/in/arthur-cesar-rocha" target="_blank" rel="noopener"><i class="fab fa-linkedin pr-1" aria-hidden="true"></i></a>
+            
+
+            
+
+            
+
+            
+
+            
+    
+            
+    
+        
+            
+                <a href="mailto:arthurcesariv@gmail.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+            
+    
+            
+
+            
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  
+  
+  
+
+</div>
+  
+    
+
+    
+  
+  <main class="post-main-wrapper">
+    
+    
+    <div class="row">
+
+      
+
+      
+      <div class="container pr-5">
+      
+
+        
+        <div class="z-depth-1  post-wrapper white-bg single-post">
+
+          <div class="post-header text-center" >
+  <ul class="post-meta li-x">
+    
+      
+        <li><a href="/categories/cool-stuff"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> Cool stuff </a></li>
+      
+    
+    
+  </ul>
+
+  <div class="px-4 post-heading">Solving the Birthday Paradox</div>
+
+  <ul class="post-meta li-x mt-1">
+    
+      <li>May 24, 2019</li>
+    
+
+    
+      <li class="middot"></li>
+      <li>4 minutes read</li>
+    
+  </ul>
+  
+
+</div>
+
+
+          <div class="post-content markdown">
+            
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<ul>
+<li><p>If you ever had a probability course, it’s probably that you had to solve the birthday paradox (also called as the birthday problem) or had heard of it at least.</p></li>
+<li>The birthday paradox consists of measuring the probability of at least 2 persons in a room, with n &lt; 365 persons, were born on the same day (<span class="math inline">\(p(n)\)</span>).</li>
+<li>To calculate this is necessary to make the assumptions that are 365 possibilities of days and each day has the same probability of being a birthday.</li>
+<li><p>Thinking on the complementary probability <span class="math inline">\(p^c(n)\)</span>(probability of none of the persons had born on the same day), after some inspiration you get:</p></li>
+</ul>
+<p><span class="math inline">\(p^c(n) = 1 \times (1 - \frac{1}{365}) \times (1 - \frac{2}{365}) \times ... \times (1 - \frac{n-1}{365}) = \frac{365!}{365^n(365-n)!}\)</span></p>
+<p>With more inspiration and some free time you can see that it can be approximated, by a Taylor expansion to:</p>
+<p><span class="math inline">\(p^c(n) \approx e^{-(n(n-1)) / 2 \times 365}\)</span></p>
+<p>And then:</p>
+<p><span class="math inline">\(p(n) = 1 - p^c(n) \approx 1 - e^{-(n(n-1)) / 2 \times 365}\)</span></p>
+<ul>
+<li>But … What if you don’t want to do all the math by hand? Well, you can always (not always, but you get the point) simulate!
+So let’s do that in R!</li>
+</ul>
+</div>
+<div id="solving-methods-in-r" class="section level2">
+<h2>Solving methods in R</h2>
+<ul>
+<li>If you want, you can implement the (boring) analytic solution using:</li>
+</ul>
+<pre class="r"><code>library(tidyverse)
+library(scales)
+
+boring = function(n) 1 - exp(-(n*(n-1)) / (2 * 365))</code></pre>
+<ul>
+<li>The you can calculate using the function:</li>
+</ul>
+<pre class="r"><code>tibble(n = 1:23, p = percent(boring(1:23)))%&gt;%
+  knitr::kable(align = &quot;c&quot;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="center">n</th>
+<th align="center">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">0.0%</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">0.3%</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">0.8%</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">1.6%</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">2.7%</td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center">4.0%</td>
+</tr>
+<tr class="odd">
+<td align="center">7</td>
+<td align="center">5.6%</td>
+</tr>
+<tr class="even">
+<td align="center">8</td>
+<td align="center">7.4%</td>
+</tr>
+<tr class="odd">
+<td align="center">9</td>
+<td align="center">9.4%</td>
+</tr>
+<tr class="even">
+<td align="center">10</td>
+<td align="center">11.6%</td>
+</tr>
+<tr class="odd">
+<td align="center">11</td>
+<td align="center">14.0%</td>
+</tr>
+<tr class="even">
+<td align="center">12</td>
+<td align="center">16.5%</td>
+</tr>
+<tr class="odd">
+<td align="center">13</td>
+<td align="center">19.2%</td>
+</tr>
+<tr class="even">
+<td align="center">14</td>
+<td align="center">22.1%</td>
+</tr>
+<tr class="odd">
+<td align="center">15</td>
+<td align="center">25.0%</td>
+</tr>
+<tr class="even">
+<td align="center">16</td>
+<td align="center">28.0%</td>
+</tr>
+<tr class="odd">
+<td align="center">17</td>
+<td align="center">31.1%</td>
+</tr>
+<tr class="even">
+<td align="center">18</td>
+<td align="center">34.2%</td>
+</tr>
+<tr class="odd">
+<td align="center">19</td>
+<td align="center">37.4%</td>
+</tr>
+<tr class="even">
+<td align="center">20</td>
+<td align="center">40.6%</td>
+</tr>
+<tr class="odd">
+<td align="center">21</td>
+<td align="center">43.7%</td>
+</tr>
+<tr class="even">
+<td align="center">22</td>
+<td align="center">46.9%</td>
+</tr>
+<tr class="odd">
+<td align="center">23</td>
+<td align="center">50.0%</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>With 23 persons the probability is about 50%!</p></li>
+<li><p>But… You can simulate, using the idea of frequentist probability, that is if you simulate a lot of rooms, let’s say 10000, then you count the number of rooms which the event happened, the proportion of occurrences will converge to the true probability of occurrence.</p></li>
+<li><p>You can implement this in R using:</p></li>
+</ul>
+<pre class="r"><code># Define the function
+birthday = function(n){
+# Create a empty vector
+  y = NULL
+
+# Simulate the 10000 rooms
+  for (i in 1:10000) {
+
+# Verify if at least 2 numbers match
+    y[i] = length(table(sample(1:365,
+                               size = n,
+                               replace = T))) &lt; n
+  
+  }
+
+# Return the proportion
+  return(mean(y))
+}</code></pre>
+<ul>
+<li>And then you can use the function:</li>
+</ul>
+<pre class="r"><code>birthday(n = 23)</code></pre>
+<pre><code>## [1] 0.5078</code></pre>
+<ul>
+<li><p>The results aren’t exactly equal but are close and can be even closer if the number of simulations increases.</p></li>
+<li><p>To ilustrate, we can compare the curves of the analytical and the simulated solutions:</p></li>
+</ul>
+<pre class="r"><code>tibble(n=seq(1,60,by = 5),
+       analytical = boring(seq(1,60,by = 5)),
+       simulated = sapply(seq(1,60,by = 5),birthday))%&gt;% 
+  gather(&quot;Method&quot;,&quot;Probability&quot;,-n)%&gt;%
+  ggplot(aes(n,Probability,col=Method))+
+  geom_line(size=1.2)</code></pre>
+<p><img src="/post/2019-05-24-solving-the-birthday-paradox_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<ul>
+<li>Seems pretty ok…</li>
+</ul>
+</div>
+<div id="the-problem-with-simulations" class="section level2">
+<h2>The p<strong>R</strong>oblem with simulations</h2>
+<ul>
+<li><p>So, it’s known that <strong>R</strong> isn’t the fasted language to do loops like this one.</p></li>
+<li><p>Thus, to solve the problem, we can try some methods. The first will be compile the function using a byte compiler:</p></li>
+</ul>
+<pre class="r"><code>library(compiler) #Package with the compiler function
+
+comp.birthday = cmpfun(birthday,
+                       options = list(optimize=3,
+                                      enableJIT=3))
+comp.birthday(n=23)</code></pre>
+<pre><code>## [1] 0.5001</code></pre>
+<ul>
+<li>A more refined approach would be using parallel computing. In R, it’s pretty straightforward with the <code>foreach</code> and <code>doParallel</code> packages.</li>
+</ul>
+<pre class="r"><code>library(foreach)
+library(doParallel)
+
+para.birthday = function(n){
+#setup parallel backend
+cores=detectCores()
+cl &lt;- makeCluster(cores[1]-1,useXDR=F)
+registerDoParallel(cl)
+
+# Parallel &quot;for&quot; loop
+y = foreach(i=1:10000) %dopar% {
+  
+  length(table(sample(1:365,
+                        size = n,
+                        replace = T))) &lt; n
+  
+}
+
+# Closing clusters 
+stopCluster(cl)
+
+# Returning the proportions
+return(mean(unlist(y)))
+}
+
+para.birthday(n=23)</code></pre>
+<pre><code>## [1] 0.5084</code></pre>
+</div>
+<div id="but-how-much-faster-did-we-get" class="section level2">
+<h2>But, how much faster did we get?</h2>
+<ul>
+<li>To measure and compare the time of the 3 simulation methods, we can use each function a bunch of times and calcule the mean time of processing. Thankfully there is no need to do this “by hand” and it can be done with the <code>microbenchmark</code> package:</li>
+</ul>
+<pre class="r"><code>library(microbenchmark)
+
+(bench.inf = microbenchmark(birthday(50),
+                           comp.birthday(50),
+                           para.birthday(50),
+                           times = 30))</code></pre>
+<pre><code>## Unit: seconds
+##               expr      min       lq     mean   median       uq      max
+##       birthday(50) 1.507785 1.535846 1.581197 1.571302 1.607885 1.832825
+##  comp.birthday(50) 1.509345 1.540851 1.565712 1.556180 1.581613 1.711634
+##  para.birthday(50) 6.589781 6.663439 6.797821 6.730544 6.971870 7.170535
+##  neval cld
+##     30  a 
+##     30  a 
+##     30   b</code></pre>
+<pre class="r"><code>autoplot(bench.inf)</code></pre>
+<pre><code>## Coordinate system already present. Adding new coordinate system, which will replace the existing one.</code></pre>
+<p><img src="/post/2019-05-24-solving-the-birthday-paradox_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<ul>
+<li>It’s funny because the more complex solution (parallel computing) get the worst result by far.</li>
+<li>This happened for two main reasons:</li>
+</ul>
+<ol style="list-style-type: lower-roman">
+<li><p>We lost about 1 or 2 second just to setup the clusters;</p></li>
+<li><p>The calculations are way too simply to worth the “parallelization”, that is, the time taken to split and pass the information for the cores is too much when compared to the real calculation made by the function.</p></li>
+</ol>
+<ul>
+<li>So, there is some methods to solve the birthday paradox!</li>
+</ul>
+</div>
+
+          </div>
+
+          
+          <div class="row">
+            <div class="col-md-8">
+            
+              <div class="mb-5">
+                
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="/tags/r" role="button">R </a></li>
+      
+    
+      <li><a href="/tags/statistics" role="button">statistics </a></li>
+      
+    
+      <li><a href="/tags/probability" role="button">probability </a></li>
+      
+    
+      <li><a href="/tags/parallel-computing" role="button">parallel-computing </a></li>
+      
+    
+      <li><a href="/tags/simulation" role="button">simulation </a></li>
+      
+    
+  </div>
+</div>
+              </div>
+            
+            </div>
+            
+          </div>
+          
+
+          
+          <div class="row pt-3">
+            <div class="col-md-6">
+              
+                <a href=/post/2019-04-24-how-many-rounds-on-top-to-glory/ class="post-meta">Previous
+                  <div class="pt-2 pb-5 d-flex">
+                    <i class="fas fa-angle-left text-grey font-weight-bold mr-2 active-color"></i>
+                    <span>How many rounds on top are necessary to be a soccer champion?</span>
+                  </div>
+                </a>
+              
+            </div>
+            
+            <div class="col-md-6 text-right" >
+              
+            </div>
+          </div>
+
+          
+
+        </div>
+        
+
+      </div>
+      
+
+      
+
+    </div>
+    
+
+
+  </main>
+  
+
+
+    
+    
+
+<footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+
+  
+  <div class="pb-2 mt-5 pt-5">
+    
+      <a href="//github.com/arthur-rocha " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+    
+    
+      <a href="//linkedin.com/in/arthur-cesar-rocha" target="_blank" rel="noopener"><i class="fab fa-linkedin-in mr-3" aria-hidden="true"></i></a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+    
+        <a href="mailto:arthurcesariv@gmail.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    
+
+    
+
+    
+
+  </div>
+  
+
+  
+  <div class="copyright py-4">
+    
+    <link rel="stylesheet" type="text/css" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+    <span>  2019 - 2019 &copy; | Made with  <i class="icon ion-heart"></i> using <i class="fab fa-github mr-3"></i> + <b>R</b>
+    
+ 
+    
+    
+    </span>
+  </div>
+  
+
+</footer>
+
+
+    
+
+
+
+
+
+
+<script type="text/javascript" src="/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/vendors/popper.min.js"></script>
+<script type="text/javascript" src="/js/vendors/holder.min.js"></script>
+<script type="text/javascript" src="/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+
+<script type="text/javascript" src="/js/vendors/mdb/mdb.min.js"></script>
+
+<script type="text/javascript" src="/js/main.js"></script>
+
+
+
+  
+  <script src="/js/vendors/highlight.pack.js"> </script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+ 
+  <script src="/js/vendors/katex/katex.min.js"> </script>
+  <script src="/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          renderMathInElement(document.body);
+      });
+  </script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  
+  new WOW().init();
+</script>
+
+
+
+
+  </body>
+</html>

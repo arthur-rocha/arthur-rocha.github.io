@@ -14,7 +14,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/post/" />
 
-<meta property="og:updated_time" content="2019-04-24T12:03:06-03:00"/>
+<meta property="og:updated_time" content="2019-05-24T12:03:06-03:00"/>
 
 
   <title>
@@ -254,6 +254,8 @@
 
   
 
+  
+
 
 
 
@@ -290,6 +292,8 @@
 
   
 
+  
+
 
 
 
@@ -310,10 +314,10 @@
         
         
         
-            <li><a href="/tags/r" role="button"><span>r (3)</span></a></li>
+            <li><a href="/tags/r" role="button"><span>r (4)</span></a></li>
           
         
-            <li><a href="/tags/statistics" role="button"><span>statistics (2)</span></a></li>
+            <li><a href="/tags/statistics" role="button"><span>statistics (3)</span></a></li>
           
         
             <li><a href="/tags/blogdown" role="button"><span>blogdown (1)</span></a></li>
@@ -331,7 +335,16 @@
             <li><a href="/tags/logistic-regression" role="button"><span>logistic-regression (1)</span></a></li>
           
         
+            <li><a href="/tags/parallel-computing" role="button"><span>parallel-computing (1)</span></a></li>
+          
+        
+            <li><a href="/tags/probability" role="button"><span>probability (1)</span></a></li>
+          
+        
             <li><a href="/tags/roc" role="button"><span>roc (1)</span></a></li>
+          
+        
+            <li><a href="/tags/simulation" role="button"><span>simulation (1)</span></a></li>
           
         
             <li><a href="/tags/soccer" role="button"><span>soccer (1)</span></a></li>
@@ -373,7 +386,7 @@
               
                 <div class="px-2 middot"></div>
                 <div>
-                  3 posts
+                  4 posts
                 </div>
               
             </div>
@@ -390,7 +403,124 @@
             
             
 
+<ul class="pagination">
+    
+    <li class="page-item">
+        <a href="/post/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    </li>
+    
+    <li class="page-item disabled">
+    <a href="" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    </li>
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item active"><a class="page-link" href="/post/">1</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/post/page/2/">2</a></li>
+    
+    
+    <li class="page-item">
+    <a href="/post/page/2/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    </li>
+    
+    <li class="page-item">
+        <a href="/post/page/2/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    </li>
+    
+</ul>
+
           </div>
+
+          
+              <div class="post-wrapper white-bg post-card">
+  
+  <a href="/post/2019-05-24-solving-the-birthday-paradox/">
+    <div class="post-header text-center">
+      <div class="px-4 post-heading">Solving the Birthday Paradox</div>
+      <ul class="post-meta li-x mt-1">
+        
+          <li>May 24, 2019</li>
+        
+    
+        
+          <li class="middot"></li>
+          <li>4 minutes read</li>
+        
+      </ul>
+    </div>
+    
+
+    
+      IntroductionIf you ever had a probability course, it’s probably that you had to solve the birthday paradox (also called as the birthday problem) or had heard of it at least.
+The birthday paradox consists of measuring the probability of at least 2 persons in a room, with n &lt; 365 persons, were born on the same day (\(p(n)\)).To calculate this is necessary to make the assumptions that are 365 possibilities of days and each day has the same probability of being a birthday.Thinking on the complementary probability \(p^c(n)\)(probability of none of the persons had born on the same day), after some inspiration you get:
+\(p^c(n) = 1 \times (1 - \frac{1}{365}) \times (1 - \frac{2}{365}) \times ... \times (1 - \frac{n-1}{365}) = \frac{365!}{365^n(365-n)!}\)
+With more inspiration and some free time you can see that it can be approximated, by a Taylor expansion to:
+\(p^c(n) \approx e^{-(n(n-1)) / 2 \times 365}\)
+And then:
+\(p(n) = 1 - p^c(n) \approx 1 - e^{-(n(n-1)) / 2 \times 365}\)
+But … What if you don’t want to do all the math by hand? Well, you can always (not always, but you get the point) simulate!So let’s do that in R!......
+    
+  </a>
+
+  
+  
+  <div class="post-meta li-x mt-2 div-x">
+    <div>
+      
+        
+          <li><a href="/categories/cool-stuff"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> Cool stuff </a></li>
+        
+      
+      
+    </div>
+   
+    <div>
+      
+        
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="/tags/r" role="button">R </a></li>
+      
+    
+      <li><a href="/tags/statistics" role="button">statistics </a></li>
+      
+    
+      <li><a href="/tags/probability" role="button">probability </a></li>
+      
+    
+      <li><a href="/tags/parallel-computing" role="button">parallel-computing </a></li>
+      
+    
+      <li><a href="/tags/simulation" role="button">simulation </a></li>
+      
+    
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+</div>
 
           
               <div class="post-wrapper white-bg post-card">
@@ -519,68 +649,6 @@ So, a few days ago my father gave me a challenge, he challenged me to understand
       
     
       <li><a href="/tags/logistic-regression" role="button">logistic-regression </a></li>
-      
-    
-  </div>
-</div>
-      
-    </div>
-  </div>
-
-</div>
-
-          
-              <div class="post-wrapper white-bg post-card">
-  
-  <a href="/post/how-and-why-i-made-this-blog/">
-    <div class="post-header text-center">
-      <div class="px-4 post-heading">How (and why) I made this blog</div>
-      <ul class="post-meta li-x mt-1">
-        
-          <li>Apr 14, 2019</li>
-        
-    
-        
-          <li class="middot"></li>
-          <li>One minute read</li>
-        
-      </ul>
-    </div>
-    
-
-    
-      It’s been a long (kind of) time since I start to formulate the idea for a blog to share my statistical/analytical stuff, more precisely since I was in the second year of my bachelor degree (2016). Since then I’ve learned a lot (in multiple fields), so, finally I’m able to make this thing happen!
-As a statistician, I was molded in the R/S-plus world, so the most convenient way to make this site (that I’ve found) was using the bookdown package for R, wich is a really great tool to build blogs like this, based in the Hugo framework, and have a nice integration with the R-studio IDE.
-For this blog I’m using the AllinOne theme by Orianna with some modifications.......
-    
-  </a>
-
-  
-  
-  <div class="post-meta li-x mt-2 div-x">
-    <div>
-      
-        
-          <li><a href="/categories/how-to"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> How to </a></li>
-        
-      
-      
-    </div>
-   
-    <div>
-      
-        
-<div class="li-x div-x post-meta">
-  <li class="pr-0"><a href="/tags/"><i class="fas fa-tags"></i></a></li>
-  <div class="tags-sm">
-    
-      <li><a href="/tags/r" role="button">R </a></li>
-      
-    
-      <li><a href="/tags/blogdown" role="button">blogdown </a></li>
-      
-    
-      <li><a href="/tags/hugo" role="button">hugo </a></li>
       
     
   </div>

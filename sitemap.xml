@@ -4,24 +4,65 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-04-24T12:03:06-03:00</lastmod>
+    <lastmod>2019-05-24T12:03:06-03:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2019-04-24T12:03:06-03:00</lastmod>
+    <lastmod>2019-05-24T12:03:06-03:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2019-04-24T12:03:06-03:00</lastmod>
+    <lastmod>2019-05-24T12:03:06-03:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/cool-stuff/</loc>
-    <lastmod>2019-04-24T12:03:06-03:00</lastmod>
+    <lastmod>2019-05-24T12:03:06-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/r/</loc>
+    <lastmod>2019-05-24T12:03:06-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/2019-05-24-solving-the-birthday-paradox/</loc>
+    <lastmod>2019-05-24T12:03:06-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-05-24T12:03:06-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/parallel-computing/</loc>
+    <lastmod>2019-05-24T12:03:06-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/probability/</loc>
+    <lastmod>2019-05-24T12:03:06-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/simulation/</loc>
+    <lastmod>2019-05-24T12:03:06-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/statistics/</loc>
+    <lastmod>2019-05-24T12:03:06-03:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -37,19 +78,7 @@
   </url>
   
   <url>
-    <loc>/tags/r/</loc>
-    <lastmod>2019-04-24T12:03:06-03:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/roc/</loc>
-    <lastmod>2019-04-24T12:03:06-03:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2019-04-24T12:03:06-03:00</lastmod>
     <priority>0</priority>
   </url>
@@ -79,12 +108,6 @@
   
   <url>
     <loc>/tags/soccer/</loc>
-    <lastmod>2019-04-24T12:03:06-03:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/statistics/</loc>
     <lastmod>2019-04-24T12:03:06-03:00</lastmod>
     <priority>0</priority>
   </url>

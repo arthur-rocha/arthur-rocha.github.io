@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Arthur Rocha</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Wed, 24 Apr 2019 12:03:06 -0300</lastBuildDate>
+    <lastBuildDate>Fri, 24 May 2019 12:03:06 -0300</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,45 @@
     <item>
       <title>R</title>
       <link>/tags/r/</link>
-      <pubDate>Wed, 24 Apr 2019 12:03:06 -0300</pubDate>
+      <pubDate>Fri, 24 May 2019 12:03:06 -0300</pubDate>
       
       <guid>/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>parallel-computing</title>
+      <link>/tags/parallel-computing/</link>
+      <pubDate>Fri, 24 May 2019 12:03:06 -0300</pubDate>
+      
+      <guid>/tags/parallel-computing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>probability</title>
+      <link>/tags/probability/</link>
+      <pubDate>Fri, 24 May 2019 12:03:06 -0300</pubDate>
+      
+      <guid>/tags/probability/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>simulation</title>
+      <link>/tags/simulation/</link>
+      <pubDate>Fri, 24 May 2019 12:03:06 -0300</pubDate>
+      
+      <guid>/tags/simulation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>statistics</title>
+      <link>/tags/statistics/</link>
+      <pubDate>Fri, 24 May 2019 12:03:06 -0300</pubDate>
+      
+      <guid>/tags/statistics/</guid>
       <description></description>
     </item>
     
@@ -62,15 +98,6 @@
       <pubDate>Wed, 24 Apr 2019 12:03:06 -0300</pubDate>
       
       <guid>/tags/soccer/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>statistics</title>
-      <link>/tags/statistics/</link>
-      <pubDate>Wed, 24 Apr 2019 12:03:06 -0300</pubDate>
-      
-      <guid>/tags/statistics/</guid>
       <description></description>
     </item>
     
