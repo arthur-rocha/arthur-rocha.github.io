@@ -91,7 +91,6 @@
       
       <a class="navbar-brand" href="/">
           
-        <img class="avatar" src="/" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
         
         <strong> Arthur Rocha</strong>
       </a>
@@ -462,14 +461,23 @@
     
 
     
-      IntroductionIf you ever had a probability course, it’s probably that you had to solve the birthday paradox (also called as the birthday problem) or had heard of it at least.
-The birthday paradox consists of measuring the probability of at least 2 persons in a room, with n &lt; 365 persons, were born on the same day (\(p(n)\)).To calculate this is necessary to make the assumptions that are 365 possibilities of days and each day has the same probability of being a birthday.Thinking on the complementary probability \(p^c(n)\)(probability of none of the persons had born on the same day), after some inspiration you get:
-\(p^c(n) = 1 \times (1 - \frac{1}{365}) \times (1 - \frac{2}{365}) \times ... \times (1 - \frac{n-1}{365}) = \frac{365!}{365^n(365-n)!}\)
+      Introduction
+
+If you ever had a probability course, it’s probably that you had to solve the birthday paradox (also called as the birthday problem) or had heard of it at least.
+
+The birthday paradox consists of measuring the probability of at least 2 persons in a room, with n &lt; 365 persons, were born on the same day (\(p(n)\)).
+To calculate this is necessary to make the assumptions that are 365 possibilities of days and each day has the same probability of being a birthday.
+Thinking on the complementary probability \(p^c(n)\)(probability of none of the persons had born on the same day), after some inspiration you get:
+
+
+\(p^c(n) = 1 \times (1 - \frac{1}{365}) \times (1 - \frac{2}{365}) \times ... \times (1 - \frac{n-1}{365}) = \frac{365!}{365^n(365-n)!}\)
 With more inspiration and some free time you can see that it can be approximated, by a Taylor expansion to:
 \(p^c(n) \approx e^{-(n(n-1)) / 2 \times 365}\)
 And then:
 \(p(n) = 1 - p^c(n) \approx 1 - e^{-(n(n-1)) / 2 \times 365}\)
-But … What if you don’t want to do all the math by hand? Well, you can always (not always, but you get the point) simulate!So let’s do that in R!......
+
+But … What if you don’t want to do all the math by hand? Well, you can always (not always, but you get the point) simulate!
+So let’s do that in R!......
     
   </a>
 
@@ -537,7 +545,40 @@ And then:
     
       So, I’ve always been interesting in the “xkcd type” of figures only because IT’S FUN.
 My goal here is to make density plots of the most common probability functions using the xkcd style.
-First of all, we will need to load these packages:library(xkcd)library(dplyr)library(ggplot2)Now, we do a function using the ggplot2 sintax to make the plot. Note that we need calculate the axes ranges and apply “jitter” to x and y to create a hand-drawn effect in the line.xkcd_density = function(x,y){# Calcule the axis rangexrange = range(x)yrange = range(y)# Plot line type &#43; jitterqplot(jitter(x),jitter(y),geom = &#34;blank&#34;)&#43;geom_line(linetype = 1,size=1.5)&#43;theme_xkcd()&#43;xkcdaxis(xrange,yrange)&#43;xlab(&#34;&#34;)&#43;ylab(&#34;&#34;)}Ploting the standart normal (0,1) density.x = seq(-3,3,by=.1)y = dnorm(x,mean=0,sd=1)xkcd_density(x,y)Ploting the Chi square (df = 3) density.x = c(0,seq(0.1,10,by=.1))y = c(0,dchisq(x[-1],df=3))xkcd_density(x,y)There you have! A nice looking (sort of) xkcd density plot!......
+
+First of all, we will need to load these packages:
+
+library(xkcd)
+library(dplyr)
+library(ggplot2)
+
+Now, we do a function using the ggplot2 sintax to make the plot. Note that we need calculate the axes ranges and apply “jitter” to x and y to create a hand-drawn effect in the line.
+
+xkcd_density = function(x,y){
+# Calcule the axis range
+xrange = range(x)
+yrange = range(y)
+# Plot line type &#43; jitter
+qplot(jitter(x),jitter(y),geom = &#34;blank&#34;)&#43;
+geom_line(linetype = 1,size=1.5)&#43;
+theme_xkcd()&#43;
+xkcdaxis(xrange,yrange)&#43;
+xlab(&#34;&#34;)&#43;
+ylab(&#34;&#34;)
+}
+
+Ploting the standart normal (0,1) density.
+
+x = seq(-3,3,by=.1)
+y = dnorm(x,mean=0,sd=1)
+xkcd_density(x,y)
+
+Ploting the Chi square (df = 3) density.
+
+x = c(0,seq(0.1,10,by=.1))
+y = c(0,dchisq(x[-1],df=3))
+xkcd_density(x,y)
+There you have! A nice looking (sort of) xkcd density plot!......
     
   </a>
 
@@ -600,10 +641,40 @@ My goal here is to make density plots of the most common probability functions u
     
 
     
-      IntroductionLike almost everyone here in Brazil, I have a passion for football (or soccer) and because of that my father and I are always alert to the national championship.
-So, a few days ago my father gave me a challenge, he challenged me to understand what is needed to be a champion in the brazilian national soccer league (knowed here as “Brasileirão”) since the competition change its format to a point based championship in 2003.Thus I’ve accepted the challenge and here are the results:
-DataFirstly we need to get the data!!I haven’t found a well structured data base to work with, so I had to work with the information provided by this site andI had to do a function to scrap the data.
-Packages usedlibrary(XML) #Package to do web scrapinglibrary(dplyr) #Manipulationlibrary(magrittr) #Manipulationlibrary(tidyr) #Manipulationlibrary(scales) #Formattinglibrary(ggplot2) #Plotslibrary(pROC) #ROC curvesThat is the function to do the web scraping. Note that the site has information only until 2015.# URL base to all yearsurl1=&#34;futpedia.globo.com/campeonato/campeonato-brasileiro/&#34;#Empty data frame to store the informationgames= data_frame()for (i in 2003:2015) { ## yearsurl2 = paste0(url1,i)readHTMLTable(url2,as.......
+      Introduction
+
+Like almost everyone here in Brazil, I have a passion for football (or soccer) and because of that my father and I are always alert to the national championship.
+So, a few days ago my father gave me a challenge, he challenged me to understand what is needed to be a champion in the brazilian national soccer league (knowed here as “Brasileirão”) since the competition change its format to a point based championship in 2003.
+
+Thus I’ve accepted the challenge and here are the results:
+
+Data
+
+Firstly we need to get the data!!
+
+I haven’t found a well structured data base to work with, so I had to work with the information provided by this site and
+I had to do a function to scrap the data.
+
+Packages used
+
+library(XML) #Package to do web scraping
+library(dplyr) #Manipulation
+library(magrittr) #Manipulation
+library(tidyr) #Manipulation
+library(scales) #Formatting
+library(ggplot2) #Plots
+library(pROC) #ROC curves
+
+That is the function to do the web scraping. Note that the site has information only until 2015.
+
+# URL base to all years
+url1=&#34;futpedia.globo.com/campeonato
+/campeonato-brasileiro/&#34;
+#Empty data frame to store the information
+games= data_frame()
+for (i in 2003:2015) { ## years
+url2 = paste0(url1,i)
+readHTMLTable(url2,as.......
     
   </a>
 
