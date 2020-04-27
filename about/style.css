@@ -90,12 +90,12 @@ h1 {
 }
 
 p {
-    font-size: 15px;
+    font-size: 120%;
     font-family: 'Raleway', serif;
 }
 
 .central_p {
-    font-size: 15px;
+    font-size: 120%;
     font-family: 'Raleway', serif;
     text-align: center;
 }
@@ -106,11 +106,10 @@ p {
 }
 
 .symbol {
-    margin: 2%;
+    margin: 1%;
 }
 
 .symbol:hover {
-    font-size: 26px;
     color: #43d7eb;
     transition: all 500ms ease;
 }
