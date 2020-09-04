@@ -149,6 +149,7 @@ body {
 
 #plot-Likes {
   width: fit-content;
+  width: moz-fit-content;
   padding:1rem 1rem 3rem 1rem;
   margin-left: auto;
   margin-right: auto;
@@ -156,6 +157,7 @@ body {
 
 #plot-Views {
   width: fit-content;
+  width: moz-fit-content;
   padding:1rem 1rem 3rem 1rem;
   margin-left: auto;
   margin-right: auto;
@@ -272,6 +274,7 @@ a:-webkit-any-link {
 }
 
 .link-videos{
+  color: #525252;
   border: .5px dashed #525252;
   border-radius: 10px;
   padding: .1px 3px .1px 3px;
