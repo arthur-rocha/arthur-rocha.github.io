@@ -247,6 +247,10 @@ a:-webkit-any-link {
   color: #525252;
 }
 
+a{
+  color: #525252;
+}
+
 .texto-barra{
   font-family:'National 2 Web';
   font-size: 18px;
