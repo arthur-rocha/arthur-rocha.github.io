@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Birthday Experiment</title>
+  <link rel="stylesheet" type="text/css" href="style.css"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div class="preload">
+
+      <div class="cakeAnimation play" style="background-image: url(resources/cake_sprite.svg);"></div>
+
+
+    <h3>Just a second</h3>
+
+
+  </div>
+  <main>
+    <section class="cover">
+      <h1>The <br> Birthday <br> Experiment</h1>
+
+    </section>
+
+    <div class="scroll">
+      <div class="mouse">
+          <div class="wheel"></div>
+      </div>
+    </div>
+
+    <section class="intro">
+      <div class="prose" style="background: none;">
+        <p style="text-align: center; display: block;"> "How likely it is to have 
+          2 or more people in the same room who have a birthday on the same day?"
+        
+        </p>
+      </div>
+      
+    </section>
+    <div class="intro-plot">
+
+    </div>
+    
+    <section class="assumptions">
+      <div class="section-title">Assumptions</div>
+      <div class="prose">
+        <p>Before we answer that question, we will make two assumptions here:</p>
+          <ul>
+            <li><b>1.</b> Any day of the year has the same probability to be a birthday;</li>
+            <li><b>2.</b> We will consider that every year has 365 days.</li>
+          </ul>
+      </div>
+    </section>
+
+    <section class="Experiment">
+      <div class="section-title">The Experiment</div>
+      <div class="prose">
+        <p>
+          If we use a little bit of frenquentist statistics theory,
+          we can assume that if we repeat an experiment a "lot" of times, 
+          then the frequency of occurring some event is close to his probability.
+          <br>
+          <span style="text-align: center; display: block;">
+          (Thats sound a little boring, I know, but have faith!)
+          </span>
+        </p>
+      </div>
+
+      <div class="prose">
+        <p>
+          To be more clear, let's simulate 100 random rooms with 20 people each and then 
+          count how many "matches" do we have:
+        </p>
+      </div>
+      <div class="scrolly">
+        
+        <div class="sticky-container" id="scrolly-waffle">
+          <figure class="sticky">
+            <div id="simulationPlot"> </div>
+          </figure>
+        
+
+          <article>
+            <div class="step" data-index="1" style="height: 250px;">
+              <div class="prose">
+                <p>In our simulation, 
+                  <span id="nMatches" class="text-highlight">41</span> 
+                  of the 100 rooms with 20 people have at least 2 persons that are born on 
+                  the same day 
+                  <span id="pctMatches">(41%)</span>.
+                   That's surprisingly high, right? </p>
+              </div>
+            </div>
+            
+            <div class="step" data-index="2">
+              <div class="prose">
+                <span style="text-align: center; display: block;">
+                  <button class="button" onclick="rerun();">RERUN SIMULATION</button>
+                </span>
+              </div>
+            </div>
+          
+          </article>
+        </div>
+
+      </div>
+    
+
+      
+    </section>
+    
+    <section id="simulationsCurve">
+      <div class="section-title">The Curve</div>
+
+      <div class="scrolly">
+        
+        <div class="sticky-container" id="scrolly-curve">
+          <figure class="sticky">
+            <div id="curvePlot"> </div>
+          </figure>
+        
+
+          <article>
+            <div class="step" data-index="1" style="height: 350px; margin-top: -18em;">
+              <div class="prose">
+                <p>If we simulate a lot of rooms with diferent sizes, then we
+                   get that curve:</p>
+              </div>
+            </div>
+            
+            <div class="step" data-index="2" style="height: 350px;">
+              <div class="prose">
+                <p>
+                  With <span class="text-highlight">23</span>  persons in the room, the probability of at least a match 
+                  is about 50%!
+              </p>
+              </div>
+            </div>
+          
+            <div class="step" data-index="3" style="height: 350px;">
+              <div class="prose">
+                <p>
+                  With <span class="text-highlight">42</span> persons in the room, the probability increase to about 90%!
+                </p>
+              </div>
+            </div>
+
+            <div class="step" data-index="4" style="height: 350px;">
+              <div class="prose">
+                <p>
+                  Hover over the curve to explore the simulations results:
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+      </div>
+
+
+
+
+    </section>
+
+
+    <section id="ending">
+      <div class="section-title"> The End. </div>
+      <div class="filler">
+      </div>
+      <hr>
+      <div class="filler"></div>
+      <span class="center">Made by:</span> 
+      <img src="resources/arthur_handwrite.png" class="handwrite">
+      <div class="contact-icons"> 
+        <a href="https://www.linkedin.com/in/arthur-cesar-rocha/">
+          <i class="fa fa-linkedin"></i>
+        </a>
+        <a href="https://www.github.com/arthur-rocha">
+          <i class="fa fa-github-square"></i>
+        </a>
+        <a href="https://arthur-rocha.github.io/">
+          <i class="fa fa-globe"></i>
+        </a>
+      </div>
+      <div class="filler"></div>
+    </section>
+  </main>
+  <script src="https://unpkg.com/intersection-observer"></script>
+  <script src="https://unpkg.com/scrollama"></script>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script src="https://d3js.org/d3-scale.v3.min.js"></script>
+  <script src="app.js"> </script>
+</body>
+
+</html>
