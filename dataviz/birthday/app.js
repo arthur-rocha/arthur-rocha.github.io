@@ -5,19 +5,24 @@ window.addEventListener("load", () => {
 });
 
 // simulation plot
+var maxWidth = d3.select(".sticky").node().offsetWidth;
+var maxHeight = .44681 * maxWidth;
+var maxMargin = 0.0638 * maxWidth;
 var nSimulated = 41;
-var margin = {top: 30, right: 30, bottom: 30, left: 30},
-  width = 470 - margin.left - margin.right,
-  height = 210 - margin.top - margin.bottom;
+var hoverable = false;
+var margin = {top: maxMargin, right: maxMargin, bottom: maxMargin, left: maxMargin},
+  width = maxWidth - margin.left - margin.right,
+  height = maxHeight - margin.top - margin.bottom;
+
 
 // append the svg object to the body of the page
 var simulationSVG = d3.select("#simulationPlot")
 .append("svg")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
+.attr("width", width + margin.left + margin.right)
+.attr("height", height + margin.top + margin.bottom)
 .append("g")
-  .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
+.attr("transform",
+      "translate(" + margin.left + "," + margin.top + ")");
 
 // Labels of row and columns
 var x_axis = Array(20).fill().map((element, index) => index + 1)
@@ -208,11 +213,11 @@ var hoveravle = false;
 
 var curveSVG = d3.select("#curvePlot")
 .append("svg")
-  .attr("width", width + margin.left + margin.right + 50)
+  .attr("width", width + margin.left + margin.right -5)
   .attr("height", height + margin.top + margin.bottom + 50)
 .append("g")
   .attr("transform",
-        "translate(" + 45 + "," + 25 + ")");
+        "translate(" + 40 + "," + 25 + ")");
 
 // Add Y axis
     var y_curve = d3.scaleLinear()
@@ -220,7 +225,8 @@ var curveSVG = d3.select("#curvePlot")
       .range([ height + 50, 0 ]);
     curveSVG.append("g")
       .call(d3.axisLeft(y_curve))
-
+      .attr("class", "axis");
+    
     curveSVG.append("text")
       .attr("text-anchor", "end")
       .attr("transform", "rotate(-90)")
@@ -232,10 +238,11 @@ var curveSVG = d3.select("#curvePlot")
 // Add X axis
     var x_curve = d3.scaleLinear()
       .domain([1, 60])
-      .range([ 0, width + 50]);
+      .range([ 0, width - 25]);
     curveSVG.append("g")
     .attr("transform", `translate(0,${height + 50})`)
-    .call(d3.axisBottom(x_curve));
+    .call(d3.axisBottom(x_curve))
+    .attr("class", "axis");
 
     curveSVG
     .append("text")
@@ -257,9 +264,10 @@ function generateCurve(m){
   return data;
 };
 
+//generate curve
 var curveData = generateCurve(60);
 
-
+//enter points
 curveSVG
   .selectAll("curve-point")
   .data(curveData)
@@ -270,27 +278,112 @@ curveSVG
   .attr("r", 1)
   .style("fill", "#a3a3a3")
   .attr("class", "curve-point")
-  .on("mouseover", function(event, d){
+
+
+function cleanCurve(){
+  //clean guideLines
+  curveSVG.
+  selectAll(".guideLines")
+  .remove()
+  .exit();
+  //clean guideText
+  curveSVG.
+  selectAll(".guideText")
+  .remove()
+  .exit();
+  //opacity = 1
+  curveSVG
+  .selectAll(".axis")
+  .attr("opacity", 1);
+}
+
+curveSVG
+  .selectAll(".curve-point")
+  .on("mouseover", function(d, i){
     if (hoverable) {
-      d3.select(this)
-      .style("fill", "#d90000")
-      .transition() // Transition 1
+      curveSVG
+      .selectAll(".curve-point")
+      .style("fill", (d, j) => j+1 == i.n ? "#ff816a":"#b8b8b8")
+      .transition("increase-points") // Transition 1
       .duration(100)
-      .attr("r", 7)
-      .style("cursor", "pointer");
+      .attr("r", (d, j) => j+1 == i.n ? 5:4)
+      .style("cursor", "pointer")
+
+      //opacity of axis
+
+    curveSVG
+    .selectAll(".axis")
+    .attr("opacity", .1);
+
+      //bottom line
+      curveSVG
+      .append("line")
+      .attr("x1", x_curve(i.n)) 
+      .attr("y1", y_curve(0))
+      .attr("x2", x_curve(i.n))
+      .attr("y2", y_curve(i.prob))
+      .style("stroke-width", 1)
+      .style("stroke", "#ff816a")
+      .style("fill", "none")
+      .style("stroke-dasharray", 5)
+      .attr("class", "guideLines");
+
+      //n text
+      curveSVG
+      .append("text")
+       .attr("x", x_curve(i.n))
+       .attr("y", y_curve(0)) 
+       //.style("stroke", "#ff816a")
+       //.style("stroke-width", 1)
+       .style("font-size", "12px")
+       .text(i.n + "")
+       .attr("class", "guideText");
+
+      //left line
+      curveSVG
+      .append("line")
+      .attr("x1", x_curve(0)) 
+      .attr("y1", y_curve(i.prob))
+      .attr("x2", x_curve(i.n))
+      .attr("y2", y_curve(i.prob))
+      .style("stroke-width", 1)
+      .style("stroke", "#ff816a")
+      .style("fill", "none")
+      .style("stroke-dasharray", 5)
+      .attr("class", "guideLines");
+
+      //n text
+      curveSVG
+      .append("text")
+       .attr("x", x_curve(0))
+       .attr("y", y_curve(i.prob)) 
+       .text(Math.round(i.prob * 100) / 100 + "%")
+       //.style("stroke", "#ff816a")
+       //.style("stroke-width", 1)
+       .style("font-size", "12px")
+       .attr("class", "guideText");
     }
     })
   .on("mouseleave", function(event, d){
     if (hoverable) {
-      d3.select(this)
-      .style("fill", "#474747")
-      .transition() // Transition 1
-      .duration(100)
-      .attr("r", 5)
-      .style("cursor", "default");
-    }
-    });
+      cleanCurve();
 
+      curveSVG
+      .selectAll(".curve-point")
+      .style("fill", "#ff816a")
+      .transition("increase-points") // Transition 1
+      .duration(100)
+      .attr("r", 4)
+      .style("cursor", "pointer");
+    }
+    }) ;
+
+
+simulationSVG
+.selectAll("text")
+.on("mouseover", function(event, d){
+  console.log("teste");
+});
 
 function initCurve(){
   curveSVG.
@@ -396,6 +489,7 @@ function updateCurve(index){
   switch (index) {
     case 0:
       initCurve();
+      hoverable = false;
       break;
     case 1:
       highlightCurve(23);
@@ -403,6 +497,7 @@ function updateCurve(index){
     case 2:
       highlightCurve(42);
       hoverable = false;
+      cleanCurve();
       break;
     case 3:
         initCurve();
