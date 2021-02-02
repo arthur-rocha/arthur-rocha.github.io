@@ -233,7 +233,7 @@ var curveSVG = d3.select("#curvePlot")
       .attr("y", -30)
       .attr("x", -19)
       .text("Probability of at least 2 matches (%)")
-      .attr("font-size",".7em");
+      .attr("font-size",".65em");
 
 // Add X axis
     var x_curve = d3.scaleLinear()
@@ -471,11 +471,11 @@ function handleStepEnter2(response) {
 
 
 function init2() {
-
+  const maxoffset = maxWidth < 400? 1:.75;
   scroller2
     .setup({
       step: "#scrolly-curve article .step",
-      offset: .7,
+      offset: maxoffset,
       debug: false
     })
     .onStepEnter(handleStepEnter2);
