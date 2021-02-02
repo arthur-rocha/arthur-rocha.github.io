@@ -233,7 +233,7 @@ var curveSVG = d3.select("#curvePlot")
       .attr("y", -30)
       .attr("x", -19)
       .text("Probability of at least 2 matches (%)")
-      .attr("font-size","12px");
+      .attr("font-size",".7em");
 
 // Add X axis
     var x_curve = d3.scaleLinear()
@@ -250,7 +250,7 @@ var curveSVG = d3.select("#curvePlot")
      .attr("x", margin.left + 100)
      .attr("y", height + margin.top + 50) 
      .text("Room Size (# of people)")
-     .attr("font-size","12px");
+     .attr("font-size",".7em");
 
 function generateCurve(m){
   function findProbability(n){
@@ -475,7 +475,7 @@ function init2() {
   scroller2
     .setup({
       step: "#scrolly-curve article .step",
-      offset: .5,
+      offset: .7,
       debug: false
     })
     .onStepEnter(handleStepEnter2);
@@ -495,9 +495,10 @@ function updateCurve(index){
       highlightCurve(23);
       break;
     case 2:
+      cleanCurve();
       highlightCurve(42);
       hoverable = false;
-      cleanCurve();
+      
       break;
     case 3:
         initCurve();
